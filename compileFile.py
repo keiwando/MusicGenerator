@@ -18,16 +18,5 @@ def compile():
 
 	call(pathToScript, shell=True)
 
-def compileToPNG():
-    pathToScript = os.path.dirname(__file__)
-    pathToScript = os.path.join(pathToScript,"static/scripts")
-    pathToScript = os.path.join(pathToScript,"CompileFile.sh")
-
-    pathToScript = re.sub(" ","\ ",pathToScript)
-
-    print "New Path: ", pathToScript
-
-    call(pathToScript, shell=True)
-
 def test():
 	return "Test"

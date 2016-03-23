@@ -1,5 +1,5 @@
 '''
-Lilypond running on a server, compiling .ly to .pdf
+Music Generator Web Application
 Copyright (C) 2016 Keiwan Donyagard
 
 This program is free software: you can redistribute it and/or modify
@@ -38,10 +38,6 @@ def allowed_file(filename):
 def compileToPDF(file):
     file.save(os.path.join(app.config['UPLOAD_FOLDER'],"Sheet.ly"))
     compileFile.compile()
-
-def compileToPNG(file):
-    file.save(os.path.join(app.config['UPLOAD_FOLDER'],"Sheet.ly"))
-    compileFile.compileToPNG()
 
 def serve_static(filename):
     root_dir = os.path.dirname(os.getcwd())
