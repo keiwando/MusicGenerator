@@ -27,11 +27,6 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 UPLOAD_FOLDER = os.path.join(APP_ROOT, 'static/Lilypond-Files')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-if __name__ == '__main__':
-    #url = "http://127.0.0.1:5000"
-    #webbrowser.open_new(url)
-    app.run(debug=True)
-
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1] == "ly"
 
@@ -74,3 +69,11 @@ def home():
 @app.route('/test/')
 def test():
     return compileFile.test()
+
+
+if __name__ == '__main__':
+    url = "http://127.0.0.1:5000"
+    webbrowser.open_new(url)
+    app.run(debug=True)
+
+

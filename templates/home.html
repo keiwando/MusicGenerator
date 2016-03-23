@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
 
-  <title>Lilypond Server</title>
+  <title>Music Generator</title>
   <meta name="description" content="Lilypond on a Server">
   <meta name="author" content="Keiwan Donyagard">
 
@@ -29,22 +29,16 @@
     			<input class="submitbutton" type="submit" id="filesubmit" name="filesubmit" value="CHOOSE LILYPOND FILE"></input>
     		</form>
 
-    		{% if result %}
-    			<div class="wide">
-    		    	<a class="downloadbutton" href="{{url_for('static',filename="Lilypond-Files/Sheet.pdf")}}" download>SAVE IMAGE</a>
-    		    </div>
-    		{% endif %}
-
     		{% if invalid %}
     		    <h2>Incompatible File. Please Upload a Lilypond File (ending with .ly)</h2>
-            {% endif %}
+        {% endif %}
 
 	    </div>
 
 	</div>
 	<div id="footer">
        <div id="links">
-            <a href="https://github.com/keiwando/lilypond-server">Source Code</a>
+            <a href="https://github.com/keiwando/musicgenerator">Source Code</a>
             <p>App based on <a href="http://www.lilypond.org/">LilyPond</a> Published under the <a href="http://www.gnu.org/licenses/">GNU General Public License</a></p>
         </div>
     </div>
