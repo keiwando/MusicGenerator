@@ -41,7 +41,7 @@ def compileToPDF(file):
 
 def serve_static(filename):
     root_dir = os.path.dirname(os.getcwd())
-    return send_from_directory(os.path.join(root_dir,'lilypond','mysite', 'static', 'Lilypond-Files'), filename)
+    return send_from_directory(os.path.join(root_dir,'musicgenerator','mysite', 'static', 'Lilypond-Files'), filename)
 
 @app.route('/')
 def default():
