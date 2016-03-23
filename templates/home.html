@@ -1,0 +1,56 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Lilypond Server</title>
+  <meta name="description" content="Lilypond on a Server">
+  <meta name="author" content="Keiwan Donyagard">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!--<link rel="stylesheet" type = "text/css" href="{{url_for('static',filename="libraries/bootstrap/css/bootstrap.min.css")}}"-->
+
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename="styles/main.css")}}">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+	<div class="container">
+	    <div id="content">
+	        <h1>LILYPOND</h1>
+
+    		<form id="fileUpload" enctype="multipart/form-data" action="." method="POST">
+    			<input class="inputFile" type="file" id="file" name="file" accept=".ly"></input>
+    			<input class="submitbutton" type="submit" id="filesubmit" name="filesubmit" value="CHOOSE LILYPOND FILE"></input>
+    		</form>
+
+    		{% if result %}
+    			<div class="wide">
+    		    	<a class="downloadbutton" href="{{url_for('static',filename="Lilypond-Files/Sheet.pdf")}}" download>SAVE IMAGE</a>
+    		    </div>
+    		{% endif %}
+
+    		{% if invalid %}
+    		    <h2>Incompatible File. Please Upload a Lilypond File (ending with .ly)</h2>
+            {% endif %}
+
+	    </div>
+
+	</div>
+	<div id="footer">
+       <div id="links">
+            <a href="https://github.com/keiwando/lilypond-server">Source Code</a>
+            <p>App based on <a href="http://www.lilypond.org/">LilyPond</a> Published under the <a href="http://www.gnu.org/licenses/">GNU General Public License</a></p>
+        </div>
+    </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <!--<script src="{{ url_for('static', filename="js/main.js")}}"></script>-->
+  <!--<script src="{{ url_for('static',filename="libraries/bootstrap/js/bootstrap.min.js")}}"></script>-->
+</body>
+</html>

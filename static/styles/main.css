@@ -1,0 +1,45 @@
+@font-face{
+	font-family: "OpenSans-Semibold";
+	src: url("fonts/OpenSans-Semibold.ttf") format("truetype");
+}
+
+html,body,#container {
+	text-align: center;
+	height: 93%;
+}
+
+body > #container {
+    height: auto;
+    min-height: 93%;
+}
+
+h1 {
+	font-family: "OpenSans-Semibold";
+	font-size: 100px;
+}
+
+.container {
+	width: 100%;
+	height: 100%;
+}
+
+#content {
+    padding-bottom: 3em;
+}
+
+.wide {
+	width: 100%;
+}
+
+#links {
+    float: bottom;
+    margin: 20px auto;
+}
+
+#footer {
+ clear: both;
+ position: relative;
+ z-index: 10;
+ height: 3em;
+ margin-top: -3em;
+}
