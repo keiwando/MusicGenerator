@@ -34,14 +34,22 @@ Vorschlag, Vorhalt,
 accent, tenuto, expressivo, staccato, portato, turn,
 trill, prall, mordent, fermata
 ppp,pp,p,mp,mf,f,ff,fff,fp,sf,sp,sfz
-crescendo, decrescendo 	+ Bits for how long
+crescendo, decrescendo 	+ 3Bits for how long
 legato begin + legato end
 arpeggio (if chord else ignore)
 
+=> 29 different expressions (5Bit)	+ 1Bit for none -> 	6Bit	
 
 
 
+STEPS FOR GENERATING .ly File:
+	1.Rhythm is generated from Bitstring.
+	for each beat in rhythm:
+		if beat is not rest:
+			add next note from melody
+			add next art/orn/dyn
 
+=> next beat/note/(art/orn/dyn) decoded by cutting off first x bits from rhythm/melody/AOD string and interpreting them
 
 
 
