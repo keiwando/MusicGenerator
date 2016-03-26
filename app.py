@@ -68,7 +68,7 @@ def home():
         elif 'randomFile' in request.form:
             MG.writeRandomLilyPondFile(random.randint(1,4),random.randint(1,6))
             compileFile.compile()
-            return serve_static("Random.pdf")
+            return serve_static("Sheet.pdf")
         else:
             return str(request.files.keys())
     else:

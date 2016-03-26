@@ -27,6 +27,21 @@ h1 {
     padding-bottom: 3em;
 }
 
+input {
+    font-family: "OpenSans-Semibold";
+    border: 3px solid black;
+    padding: 10px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.randomButton {
+    font-size: 20px;
+    padding: 20px;
+    border: 4px solid;
+    margin: 20px auto;
+}
+
 .wide {
 	width: 100%;
 }
@@ -45,5 +60,5 @@ h1 {
 }
 
 @media (max-width: 900px){
-	
+
 }

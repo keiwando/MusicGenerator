@@ -33,7 +33,9 @@
     		    <h2>Incompatible File. Please Upload a Lilypond File (ending with .ly)</h2>
         {% endif %}
 
-        <input class="randomButton" type="submit" name="randomFile" value="RANDOM"></input>
+        <form action="." method="POST">
+            <input class="randomButton" type="submit" name="randomFile" value="RANDOM"></input>
+        </form>
 
 	    </div>
 
