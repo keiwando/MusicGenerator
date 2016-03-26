@@ -59,12 +59,14 @@ STEPS FOR GENERATING .ly File:
 => rhythm/melody/Art.. strings have constant lengths
 
 LENGTHS:
-Rhythm 				100 Sounds/Silences			=> 500 Bits
+Rhythm 				200 Sounds/Silences			=> 500 Bits
 melody 				xxx Notes					=> 15000 Bit (enough after testing)
 Art/Orn/Dyn 		400							=> 2400 Bit  
 
 
-Complexity levels: 1 2 3
+Complexity levels: 
+rhythm: 1 2 3 4
+melody: 1 2 3 4 5 6
 
 general:
 \set Staff.extraNatural = ##f

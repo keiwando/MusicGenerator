@@ -40,16 +40,17 @@ class RhythmDecoder:
 			result += "r"
 
 		length = int(length,2)
-		if self.complexity == 1:
+		if self.complexity <= 2:
 			if length > 3:
 				length = 3
-		elif self.complexity == 2:
-			if length > 5:
-				length = 5
+		elif self.complexity == 3:
+			if length > 4:
+				length = 3
 		result += str(2**length)
 
-		if dot == "1":
-			result += "."
+		if self.complexity > 1:
+			if dot == "1":
+				result += "."
 
 		return result
 
@@ -74,7 +75,7 @@ class MelodyDecoder:
 		
 		if comp == 1:
 			accIntex = 0
-		elif comp == 2:
+		elif comp >= 2 and comp < 5:
 			accIntex = accIntex % 3
 		else:
 			accIntex = accIntex % 5
@@ -84,8 +85,12 @@ class MelodyDecoder:
 		octave = int(self.melody.next(3),2) 
 		if comp == 1:
 			octave = octave % 4
-		elif comp == 2:
+		elif comp <= 3:
+			octave = octave % 5
+		elif comp == 4:
 			octave = octave % 6
+		elif comp == 5:
+			octave = octave % 7
 
 		if clef == "treble":
 			note += octavesTreble[octave]
@@ -100,15 +105,18 @@ class MelodyDecoder:
 	def next(self,clef):
 		comp = self.complexity
 		if not self.inChord:
-			if comp > 1:
+			if comp > 2:
 				choN = self.melody.next(2)
 				numberOfNotesInChord = int(self.melody.next(3),2)
-				if comp == 2:
-					numberOfNotesInChord = numberOfNotesInChord % 5
-				elif comp == 3:
-					numberOfNotesInChord = numberOfNotesInChord % 7
+				if comp == 3:
+					numberOfNotesInChord = numberOfNotesInChord % 3
+				elif comp == 4:
+					numberOfNotesInChord = numberOfNotesInChord % 4
+				else:
+					numberOfNotesInChord = numberOfNotesInChord % 6
 
 				self.NiC = numberOfNotesInChord
+				self.inChord = True
 
 		result = ""
 		if self.NiC != 0:
@@ -117,6 +125,7 @@ class MelodyDecoder:
 				result += " " + self.nextNote(clef)
 				self.NiC -= 1
 			result += ">"
+			self.inChord = False
 		else:
 			result = self.nextNote(clef)
 
@@ -148,14 +157,14 @@ def generateLilyPondLower(notes):
 			"\n \t\\clef bass\n\t" + notes + "\n}\n\n"	#not  \\relative c
 
 def generateLilyPondPianoScore():
-	return "\\score {\n" + " \\new PianoStaff <<\n" + "  \\set PianoStaff.instrumentName = #\"Piano  \"\n" + \
+	return "\\score {\n" + " \\new PianoStaff <<\n" + "  %\\set PianoStaff.instrumentName = #\"Piano  \"\n" + \
 			"  \\new Staff = \"upper\" \\upper\n" + "  \\new Staff = \"lower\" \\lower\n >>\n}\n\n"
 
 def generateLilyPondVersionNumber():
 	return "\\version \"2.18.2\""
 
 def generateRandomRhythmString():
-	length = 500
+	length = 1500
 	maxRythmDecimal = (2**length)
 	rhythmAsDecimal = random.randint(0,maxRythmDecimal)
 	rhythmAsBinary = bin(rhythmAsDecimal)[2:].zfill(length)
@@ -175,18 +184,18 @@ def generateRandomArtOrnDynString():
 	resultAsBinary = bin(maxDecimal)[2:].zfill(length)
 	return resultAsBinary
 
-def writeRandomLilyPondFile(complexity):
+def writeRandomLilyPondFile(rhythmCompl,melodyCompl):
 	rhythmString = generateRandomRhythmString()
 	melodyString = generateRandomMelodyString()
 	articString = generateRandomArtOrnDynString()
 	rhythm = StringQueue(rhythmString)
 	melody = StringQueue(melodyString)
 	artic = StringQueue(articString)
-	rDecoder = RhythmDecoder(rhythm,complexity)
-	mDecoder = MelodyDecoder(melody,complexity)
+	rDecoder = RhythmDecoder(rhythm,rhythmCompl)
+	mDecoder = MelodyDecoder(melody,melodyCompl)
 
 	musicUpper = ""
-	for i in range(0,50):
+	for i in range(0,150):
 		beat = rDecoder.next()
 		#determine if note or rest
 		det = beat[0:1]
@@ -199,7 +208,7 @@ def writeRandomLilyPondFile(complexity):
 		musicUpper += " "
 
 	musicLower = ""
-	for i in range(0,50):
+	for i in range(0,150):
 		beat = rDecoder.next()
 		#determine if note or rest
 		det = beat[0:1]
@@ -215,7 +224,7 @@ def writeRandomLilyPondFile(complexity):
 	#missing art..
 
 	#save to file
-	writeLilyPondFile(musicUpper,musicLower,"Random","Random Music")
+	writeLilyPondFile(musicUpper,musicLower,"Sheet","Random")
 
 
 def writeLilyPondFile(upper,lower,filename,title):
@@ -252,7 +261,7 @@ def testRhythmDecoder():
 	testString = generateRandomRhythmString()
 	rhythm = StringQueue(testString)
 	decoder = RhythmDecoder(rhythm,3)
-	for i in range(0,100):
+	for i in range(0,300):
 		print decoder.next()
 
 def testMelodyDecoder():
@@ -264,7 +273,7 @@ def testMelodyDecoder():
 
 
 #testMelodyDecoder()
-writeRandomLilyPondFile(1)
+#writeRandomLilyPondFile(3,1)
 
 
 

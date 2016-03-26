@@ -20,6 +20,8 @@ from werkzeug import secure_filename
 import webbrowser
 import os
 import compileFile
+import random
+import MusicGenerator as MG
 
 app = Flask(__name__)
 
@@ -46,6 +48,7 @@ def default():
 @app.route('/',methods=['POST','GET'])
 def home():
     if request.method == 'POST':
+        '''
         if 'external' in request.form:
             if 'file' in request.files:
                 file = request.files['file']
@@ -54,13 +57,18 @@ def home():
                     return serve_static("Sheet.pdf")
             else:
                 return "file not allowed"
-        elif 'file' in request.files:
+                '''
+        if 'file' in request.files:
             file = request.files['file']
             if allowed_file(file.filename):
                 compileToPDF(file)
                 return serve_static("Sheet.pdf")
             else:
                 return render_template('home.html', result=False, invalid=True)
+        elif 'randomFile' in request.form:
+            MG.writeRandomLilyPondFile(random.randint(1,4),random.randint(1,6))
+            compileFile.compile()
+            return serve_static("Random.pdf")
         else:
             return str(request.files.keys())
     else:
