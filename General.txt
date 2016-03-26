@@ -32,13 +32,13 @@ octave = (0 1 2 3 4 5 6 7)								3Bit 	0 = 2
 
 
 Articulation, Ornamentation and Dynamics:						(these might be referred to as simply 'artic' in the future)
-Vorschlag, Vorhalt, 
+#Vorschlag, Vorhalt, 
 accent, tenuto, expressivo, staccato, portato, turn,
 trill, prall, mordent, fermata
 ppp,pp,p,mp,mf,f,ff,fff,fp,sf,sp,sfz
-crescendo, decrescendo 	+ 3Bits for how long
+crescendo start, decrescendo start ,cresc./decr.end	
 legato begin + legato end
-arpeggio (if chord else ignore)
+#arpeggio (if chord else ignore)
 
 => 29 different expressions (5Bit)	+ 1Bit for none -> 	6Bit	
 

@@ -138,10 +138,36 @@ class ArticDecoder:
 	def __init__(self,artic,complexity):
 		self.complexity = complexity
 		self.artic = artic
+		self.dynamics = ['ppp','pp','p','mp','mf','f','ff','fff','fp','sf','sp','sfz',"<",">","!"]
+		self.articulation = ['(',')','staccato','portato','trill','accent','tenuto', 'turn','fermata','prall', 'mordent','expressivo']
+
+	def nextExpression(self):
+		dec = int(self.artic.next(1),2)
+		index = int(self.artic.next(4),2)
+		if dec == 0:
+			index = index % len(self.dynamics)
+			return self.dynamics[index]
+		else:
+			index = index % len(self.articulation)
+			return self.articulation[index]
 
 	def next(self):
-		choice = ['accent','tenuto','expressivo', 'staccato', 'portato', 'turn', 'trill', 'prall', 'mordent', 'fermata']
-		pass	
+		
+		dec = int(self.artic.next(2),2)
+		comp = self.complexity
+		if comp == 1:
+			return ""
+		elif comp == 2:
+			if dec < 3:
+				return ""
+			else:
+				return "\\" + self.nextExpression()
+		elif comp == 3:
+			if dec < 2:
+				return ""
+			else:
+				return "\\" + self.nextExpression()
+
 
 def generateLilyPondHeader(title):
 	return "\\header{ title = \"" + title + "\"} \n\n"
@@ -181,10 +207,10 @@ def generateRandomArtOrnDynString():
 	length = 2400
 	maxDecimal = (2**length)
 	resultAsDecimal = random.randint(0,maxDecimal)
-	resultAsBinary = bin(maxDecimal)[2:].zfill(length)
+	resultAsBinary = bin(resultAsDecimal)[2:].zfill(length)
 	return resultAsBinary
 
-def writeRandomLilyPondFile(rhythmCompl,melodyCompl):
+def writeRandomLilyPondFile(rhythmCompl,melodyCompl,articCompl):
 	rhythmString = generateRandomRhythmString()
 	melodyString = generateRandomMelodyString()
 	articString = generateRandomArtOrnDynString()
@@ -193,6 +219,7 @@ def writeRandomLilyPondFile(rhythmCompl,melodyCompl):
 	artic = StringQueue(articString)
 	rDecoder = RhythmDecoder(rhythm,rhythmCompl)
 	mDecoder = MelodyDecoder(melody,melodyCompl)
+	aDecoder = ArticDecoder(artic,articCompl)
 
 	musicUpper = ""
 	for i in range(0,150):
@@ -205,6 +232,8 @@ def writeRandomLilyPondFile(rhythmCompl,melodyCompl):
 			musicUpper += beat[1:]
 		else:
 			musicUpper += beat
+		#expressions
+		musicUpper += aDecoder.next()
 		musicUpper += " "
 
 	musicLower = ""
@@ -218,10 +247,8 @@ def writeRandomLilyPondFile(rhythmCompl,melodyCompl):
 			musicLower += beat[1:]
 		else:
 			musicLower += beat
+		musicLower += aDecoder.next()
 		musicLower += " "
-
-
-	#missing art..
 
 	#save to file
 	writeLilyPondFile(musicUpper,musicLower,"Sheet","Random")
@@ -271,10 +298,16 @@ def testMelodyDecoder():
 	for i in range(0,400):
 		print decoder.next("treble")
 
+def testArticDecoder():
+	testString = generateRandomArtOrnDynString()
+	artic = StringQueue(testString)
+	decoder = ArticDecoder(artic,3)
+	for i in range (0,400):
+		print decoder.next()
+
 
 #testMelodyDecoder()
-#writeRandomLilyPondFile(3,1)
-
+writeRandomLilyPondFile(3,1,2)
 
 
 

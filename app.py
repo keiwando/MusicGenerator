@@ -66,7 +66,10 @@ def home():
             else:
                 return render_template('home.html', result=False, invalid=True)
         elif 'randomFile' in request.form:
-            MG.writeRandomLilyPondFile(random.randint(1,4),random.randint(1,6))
+            rhyCompl = random.randint(1,4)
+            melCompl = random.randint(1,6)
+            expCompl = random.randint(1,3)
+            MG.writeRandomLilyPondFile(rhyCompl,melCompl,expCompl)
             compileFile.compile()
             return serve_static("Sheet.pdf")
         else:
