@@ -3,10 +3,17 @@
  upper = \new Voice \with {
     \remove "Note_heads_engraver"
     \consists "Completion_heads_engraver"
-  } \relative c''{
-   \clef treble <c e g>2 bes1 g4 a b c } 
+  } 
+  \relative c'{
+   	\clef treble 
+   	<c e g>2 bes1 g4 a b c 
+  } 
 
- lower = \relative c{ \clef bass <d f a> gis16 g f d f2 } 
+ lower = \new Voice \with {
+    \remove "Note_heads_engraver"
+    \consists "Completion_heads_engraver"
+  } 
+  \relative c{ \clef bass <d f a> gis16 g f d f1 } 
 
  \score {
   \new PianoStaff <<

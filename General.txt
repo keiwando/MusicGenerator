@@ -20,16 +20,18 @@ Melody - general succession of musical pitches:
 chord or not 											2Bit	(2bit providing level of adjustment of complexity)
 	if chord
 	number of notes in chord:							3Bit	(2 3 4 5 6 2 3 4)
-musical tone = C D E F G A B 							3Bit	000 = repeat PREVIOUS (IF DOESN'T EXISTS => C)
+musical tone = C D E F G A B 							3Bit	000 = C
 accidentals = sharp flat natural (double sharp) 		3Bit    rel: 1:1:4:1:1	(natural 4 times as likely)
 			(double flat)
-octave = (0 1 2 3 4 5 6 7)								3Bit
+octave = (0 1 2 3 4 5 6 7)								3Bit 	0 = 2
+		 (-1 0 +1 +2 +3 +4)-treble						 		rel: 1:2:2:1:1:1 	(0 2 times as likely)
+		 (-2 -1 0 1)-bass										rel: 1:4:2:1
 
 => Melody: 11Bit each note (+3Bit - once - if chord)
 
 
 
-Articulation, Ornamentation and Dynamics:
+Articulation, Ornamentation and Dynamics:						(these might be referred to as simply 'artic' in the future)
 Vorschlag, Vorhalt, 
 accent, tenuto, expressivo, staccato, portato, turn,
 trill, prall, mordent, fermata
@@ -41,6 +43,7 @@ arpeggio (if chord else ignore)
 => 29 different expressions (5Bit)	+ 1Bit for none -> 	6Bit	
 
 
+beat := sound or silence
 
 STEPS FOR GENERATING .ly File:
 	1.Rhythm is generated from Bitstring.
@@ -53,6 +56,15 @@ STEPS FOR GENERATING .ly File:
 
 
 
+=> rhythm/melody/Art.. strings have constant lengths
+
+LENGTHS:
+Rhythm 				100 Sounds/Silences			=> 500 Bits
+melody 				xxx Notes					=> 15000 Bit (enough after testing)
+Art/Orn/Dyn 		400							=> 2400 Bit  
+
+
+Complexity levels: 1 2 3
 
 general:
 \set Staff.extraNatural = ##f
