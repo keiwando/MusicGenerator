@@ -73,7 +73,7 @@ def home():
             compileFile.compile()
             return serve_static("Sheet.pdf")
         else:
-            return str(request.files.keys())
+            return str(request.form)
     else:
         return render_template('home.html')
 

@@ -3,9 +3,25 @@
 	src: url("fonts/OpenSans-Semibold.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: "OpenSans";
+  src: url("fonts/OpenSans-Regular.ttf") format("truetype")
+}
+
+@font-face {
+  font-family: "OpenSans-Bold";
+  src: url("fonts/OpenSans-Bold.ttf") format("truetype")
+}
+
+@font-face {
+  font-family: "Lovelo";
+  src: url("fonts/Lovelo_Black.otf") format("opentype"),
+       url("fonts/Lovelo_Black.woff") format("woff");
+}
+
 html,body,#container {
 	text-align: center;
-	height: 93%;
+	height: 96%;
 }
 
 body > #container {
@@ -18,6 +34,109 @@ h1 {
 	font-size: 50px;
 }
 
+h2 {
+	font-family: "Lovelo";
+	font-size: 30px;
+}
+
+h3 {
+	font-family: "Lovelo";
+	font-size: 20px;
+}
+
+input {
+    font-family: "OpenSans-Bold";
+    border: 3px solid black;
+    padding: 6px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+input[type="submit"] {
+	font-size: 20px;
+	cursor: pointer;
+	margin: 5px;
+}
+
+input[type="radio"] {
+	display: none;
+}
+
+input[type="radio"] + label {
+	color: black;
+	font-family: "OpenSans-Semibold"
+	font-size: 15px;
+}
+
+input[type="radio"] + label span {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	margin: 5px;
+	vertical-align: middle;
+	cursor: pointer;
+	border-radius: 100%;
+	border: 2px solid black;
+	background-color: white;
+}
+
+input[type="radio"]:checked + label span {
+	background-color: black;
+}
+
+input[type="radio"] + label span,
+input[type="radio"]:checked + label span {
+  -webkit-transition:background-color 0.2s linear;
+  -o-transition:background-color 0.2s linear;
+  -moz-transition:background-color 0.2s linear;
+  transition:background-color 0.2s linear;
+}
+
+.lock img {
+	width: 40px;
+	height: auto;
+	margin: 10px;
+	cursor: pointer;
+}
+
+.switch input + label span {
+	border-radius: 0px;
+	margin: 0px;
+}
+
+.switch input + label {
+	margin-left: -2px;
+	margin-right: -2px;
+}
+
+label {
+	font-family: "Lovelo";
+}
+
+textarea {
+	width: 250px;
+	height: 150px;
+
+	border: 2px solid black;
+	resize: none;
+	pointer-events: none;
+
+	font-family: "OpenSans-Semibold"
+} 
+
+a {
+	text-decoration: none;
+}
+
+a:visited {
+	color: rgba(0,0,0,0.5);
+	text-decoration: none;
+}
+
+.hidden {
+	display: none;
+}
+
 .container {
 	width: 100%;
 	height: 100%;
@@ -25,30 +144,61 @@ h1 {
 
 #content {
     padding-bottom: 3em;
+
+    
 }
 
-input {
-    font-family: "OpenSans-Semibold";
-    border: 3px solid black;
-    padding: 10px;
-    background-color: white;
-    border-radius: 5px;
+.settings-container {
+	display: inline-flex;
+	justify-content: space-between;
 }
 
 .randomButton {
     font-size: 20px;
-    padding: 20px;
+    padding: 10px;
     border: 4px solid;
     margin: 20px auto;
+}
+
+.update-button {
+	font-size: 10px;
+	margin: 10px auto;
+	border: 2px dotted;
+}
+
+.random-form {
+	margin: 10px;
+}
+
+.button:hover {
+	cursor: pointer;
 }
 
 .wide {
 	width: 100%;
 }
 
+.setting {
+	display: inline-block;
+	width: 500px;
+	margin: 20px;
+}
+
+.rhythmSetting {
+}
+
 #links {
     float: bottom;
     margin: 20px auto;
+}
+
+#links p {
+	font-family: "OpenSans-Semibold";
+}
+
+#links a {
+	font-family: "OpenSans-Bold";
+	color: rgba(0,0,0,0.7);
 }
 
 #footer {

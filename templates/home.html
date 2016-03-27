@@ -24,17 +24,89 @@
 	    <div id="content">
 	        <h1>Music Generator</h1>
 
-    		<form id="fileUpload" enctype="multipart/form-data" action="." method="POST">
+    		<!--<form id="fileUpload" enctype="multipart/form-data" action="." method="POST">
     			<input class="inputFile" type="file" id="file" name="file" accept=".ly"></input>
     			<input class="submitbutton" type="submit" id="filesubmit" name="filesubmit" value="CHOOSE LILYPOND FILE"></input>
     		</form>
 
     		{% if invalid %}
     		    <h2>Incompatible File. Please Upload a Lilypond File (ending with .ly)</h2>
-        {% endif %}
+        {% endif %}  -->
+
+        <div class="settings-container">
+
+          <div class="rhythmSetting setting">
+            <h2>RHYTHM</h2>
+            
+            <div class="lock" id="rhythm-lock">
+              <img class="unlocked-img" src="{{url_for('static',filename="images/lock-unlocked.png")}}">
+              <img class="locked-img hidden" src="{{url_for('static',filename="images/lock-locked.png")}}">
+            </div>
+
+            <div class="switch" id="rhythm-switch">
+                <input type="radio" name="rhythm-choice-switch" id="rhythm-choice-input" value="choice">
+                  <label for="rhythm-choice-input">BY INPUT    <span></span></label>
+                </input>
+
+                <input type="radio" name="rhythm-choice-switch" id="rhythm-choice-random" value="random" checked>
+                  <label for="rhythm-choice-random"><span></span>   RANDOM</label>
+                </input> 
+            </div>
+            
+
+            <div class="noteInput hidden">
+              <form id="rhythmInputByButton" action="." method="POST">
+                <input type="radio" name="note-rest" id="note-rest-x" value="x" checked>
+                  <label for="note-rest-x" ><span></span>NOTE</label></input>
+                <input type="radio" name="note-rest" id="note-rest-r" value="r">
+                  <label for="note-rest-r" ><span></span>REST</label></input>
+                <div id="lengthChoice">
+                  <input type="radio" name="length" id="length1" value="1">
+                    <label for="length1"><span></span>1</label></input>
+                  <input type="radio" name="length" id="length2" value="2">
+                    <label for="length2"><span></span>2</label></input>
+                  <input type="radio" name="length" id="length4" value="4" checked>
+                    <label for="length4"><span></span>4</label></input>
+                  <input type="radio" name="length" id="length8" value="8">
+                    <label for="length8"><span></span>8</label></input>
+                  <input type="radio" name="length" id="length16" value="16">
+                    <label for="length16"><span></span>16</label></input>
+                  <input type="radio" name="length" id="length32" value="32">
+                    <label for="length32"><span></span>32</label></input>
+                  <input type="radio" name="length" id="length64" value="64">
+                    <label for="length64"><span></span>64</label></input>
+                  <input type="radio" name="length" id="length128" value="128">
+                    <label for="length128"><span></span>128</label></input>
+                </div>  
+
+                <input type="submit" id="add-rhythm" value="ADD"></input>
+                <br>
+                <textarea id="rhythmInput" name="rhythm"></textarea>
+              </form>
+              
+            </div>
+
+            <form class="random-form" id="rhythm-random-form" action="." method="POST">
+              <label>COMPLEXITY</label>
+              <input type="radio" name="rhythm-compl" id="rhythm-compl-1" value="1" checked>
+                <label for="rhythm-compl-1" ><span></span>1</label></input>
+              <input type="radio" name="rhythm-compl" id="rhythm-compl-2" value="2">
+                <label for="rhythm-compl-2" ><span></span>2</label></input>
+              <input type="radio" name="rhythm-compl" id="rhythm-compl-3" value="3" >
+                <label for="rhythm-compl-3" ><span></span>3</label></input>
+              <input type="radio" name="rhythm-compl" id="rhythm-compl-4" value="4" >
+                <label for="rhythm-compl-4" ><span></span>4</label></input>
+
+              <br>
+              <input class="update-button" type="submit" name="update-button" value="UPDATE"></input>
+            </form>
+          </div> <!-- end rhythm setting-->
+        </div>
+
+        
 
         <form action="." method="POST">
-            <input class="randomButton" type="submit" name="randomFile" value="RANDOM"></input>
+            <input class="button randomButton" type="submit" name="randomFile" value="RANDOM"></input>
         </form>
 
 	    </div>
@@ -44,11 +116,11 @@
        <div id="links">
             <a href="https://github.com/keiwando/musicgenerator">Source Code</a>
             <p>App based on <a href="http://www.lilypond.org/">LilyPond</a> Published under the <a href="http://www.gnu.org/licenses/">GNU General Public License</a></p>
-        </div>
-    </div>
+      </div>
+  </div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <!--<script src="{{ url_for('static', filename="js/main.js")}}"></script>-->
+  <script src="{{ url_for('static', filename="js/main.js")}}"></script>
   <!--<script src="{{ url_for('static',filename="libraries/bootstrap/js/bootstrap.min.js")}}"></script>-->
 </body>
 </html>
