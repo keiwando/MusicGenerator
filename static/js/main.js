@@ -26,16 +26,21 @@ $(document).ready(function(){
 			var currentLock = $(this)
 			$(this).find($("img")).click(function(){
 				if($(this).attr('class') == "unlocked-img"){
-					//unlock
-					$(this).addClass("hidden");
-					currentLock.find('.locked-img').removeClass("hidden");
-				}else{
 					//lock
 					$(this).addClass("hidden");
-					currentLock.find('.unlocked-img').removeClass("hidden");
+					currentLock.find('.locked-img').removeClass("hidden");
+					
 					$('#rhythm-switch').addClass("locked");
 					$('.noteInput').addClass("locked");
-					$()
+					$('.random-form').addClass("locked");
+				}else{
+					//unlock
+					$(this).addClass("hidden");
+					currentLock.find('.unlocked-img').removeClass("hidden");
+					
+					$('#rhythm-switch').removeClass("locked");
+					$('.noteInput').removeClass("locked");
+					$('.random-form').removeClass("locked");
 				}
 			});
 		});

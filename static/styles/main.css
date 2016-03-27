@@ -64,7 +64,7 @@ input[type="radio"] {
 
 input[type="radio"] + label {
 	color: black;
-	font-family: "OpenSans-Semibold"
+	font-family: "OpenSans-Semibold";
 	font-size: 15px;
 }
 
@@ -97,6 +97,30 @@ input[type="radio"]:checked + label span {
 	height: auto;
 	margin: 10px;
 	cursor: pointer;
+}
+
+.locked * {
+	pointer-events: none;
+	color: rgba(0,0,0,0.4);
+}
+
+.locked input,
+.locked textarea {
+	border-color: rgba(0,0,0,0.4);
+}
+
+.locked input[type="radio"] + label{
+	color: rgba(0,0,0,0.4);
+	border-color: rgba(0,0,0,0.4);
+}
+
+.locked input[type="radio"] + label span {
+	border-color: rgba(0,0,0,0.4);
+}
+
+.locked input[type="radio"]:checked + label span {
+	border-color: rgba(0,0,0,0);
+	background-color: rgba(0,0,0,0.4);
 }
 
 .switch input + label span {
