@@ -86,10 +86,10 @@ input[type="radio"]:checked + label span {
 
 input[type="radio"] + label span,
 input[type="radio"]:checked + label span {
-  -webkit-transition:background-color 0.2s linear;
-  -o-transition:background-color 0.2s linear;
-  -moz-transition:background-color 0.2s linear;
-  transition:background-color 0.2s linear;
+  -webkit-transition:background-color 0.1s linear;
+  -o-transition:background-color 0.1s linear;
+  -moz-transition:background-color 0.1s linear;
+  transition:background-color 0.1s linear;
 }
 
 .lock img {
@@ -139,14 +139,38 @@ label {
 
 textarea {
 	width: 250px;
-	height: 150px;
+	height: 70px;
 
 	border: 2px solid black;
 	resize: none;
 	pointer-events: none;
 
 	font-family: "OpenSans-Semibold"
-} 
+}
+
+::-webkit-input-placeholder {
+	text-align: center;
+	font-size: 20px;
+   	color: black;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+	text-align: center;
+	font-size: 20px;
+   	color: black;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+	text-align: center;
+	font-size: 20px;
+   	color: black;  
+}
+
+:-ms-input-placeholder {
+	text-align: center; 
+	font-size: 20px; 
+   	color: black;  
+}
 
 a {
 	text-decoration: none;
@@ -234,5 +258,9 @@ a:visited {
 }
 
 @media (max-width: 900px){
+	html,body,#container {
+		text-align: center;
+		height: auto;
+	}
 
 }

@@ -44,17 +44,17 @@
             </div>
 
             <div class="switch" id="rhythm-switch">
-                <input type="radio" name="rhythm-choice-switch" id="rhythm-choice-input" value="choice">
+                <input type="radio" name="rhythm-choice-switch" id="rhythm-choice-input" value="choice" checked>
                   <label for="rhythm-choice-input">BY INPUT    <span></span></label>
                 </input>
 
-                <input type="radio" name="rhythm-choice-switch" id="rhythm-choice-random" value="random" checked>
+                <input type="radio" name="rhythm-choice-switch" id="rhythm-choice-random" value="random">
                   <label for="rhythm-choice-random"><span></span>   RANDOM</label>
                 </input> 
             </div>
             
 
-            <div class="noteInput hidden">
+            <div class="noteInput">
               <form id="rhythmInputByButton" action="." method="POST">
                 <input type="radio" name="note-rest" id="note-rest-x" value="x" checked>
                   <label for="note-rest-x" ><span></span>NOTE</label></input>
@@ -77,16 +77,21 @@
                     <label for="length64"><span></span>64</label></input>
                   <input type="radio" name="length" id="length128" value="128">
                     <label for="length128"><span></span>128</label></input>
-                </div>  
+                </div>
+                <!--<input type="radio" name="dotted" id="dotted" value="dot">
+                  <label for="dotted"><span></span>DOTTED</label>
+                </input>  -->
 
-                <input type="submit" id="add-rhythm" value="ADD"></input>
+                <input type="submit" id="add-rhythm-treble" name="add-rhythm-treble" value="ADD Tr."></input>
+                <input type="submit" id="add-rhythm-bass" name="add-rhythm-bass" value="ADD Ba."></input>
                 <br>
-                <textarea id="rhythmInput" name="rhythm"></textarea>
+                <textarea class="rhythm-input" id="upper-rhythm" name="rhythm-upper" placeholder="Treble Staff">{{ trebleRhythm }}</textarea>
+                <textarea class="rhythm-input" id="lower-rhythm" name="rhythm-lower" placeholder="Bass Staff">{{ bassRhythm }}</textarea>
               </form>
               
             </div>
 
-            <form class="random-form" id="rhythm-random-form" action="." method="POST">
+            <form class="random-form random-rhythm-form hidden" id="rhythm-random-form" action="." method="POST">
               <label>COMPLEXITY</label>
               <input type="radio" name="rhythm-compl" id="rhythm-compl-1" value="1" checked>
                 <label for="rhythm-compl-1" ><span></span>1</label></input>
@@ -98,15 +103,16 @@
                 <label for="rhythm-compl-4" ><span></span>4</label></input>
 
               <br>
-              <input class="update-button" type="submit" name="update-button" value="UPDATE"></input>
+              <!--<input class="update-button" type="submit" name="update-button" value="UPDATE"></input>-->
             </form>
           </div> <!-- end rhythm setting-->
         </div>
 
         
 
-        <form action="." method="POST">
-            <input class="button randomButton" type="submit" name="randomFile" value="RANDOM"></input>
+        <form id="mainForm" action="." method="POST">
+          <input class="" type="number" name="rhythm-complexity" id="rhythm-complexity" min="1" max="4"></input>
+          <input class="button randomButton" type="submit" name="randomFile" value="RANDOM"></input>
         </form>
 
 	    </div>

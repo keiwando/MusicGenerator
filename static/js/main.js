@@ -46,4 +46,22 @@ $(document).ready(function(){
 		});
 	}
 
+	if($('.random-rhythm-form').length > 0){
+		$('#rhythm-complexity').val(1);
+		$('#rhythm-compl-1').click(function(){
+			$('#rhythm-complexity').val(1);
+		});
+		$('#rhythm-compl-2').click(function(){
+			$('#rhythm-complexity').val(2);
+		});
+		$('#rhythm-compl-3').click(function(){
+			$('#rhythm-complexity').val(3);
+		});
+		$('#rhythm-compl-4').click(function(){
+			$('#rhythm-complexity').val(4);
+		});
+	}
+
+	
+
 });
