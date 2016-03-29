@@ -48,24 +48,7 @@ def default():
 @app.route('/',methods=['POST','GET'])
 def home():
     if request.method == 'POST':
-       
-        if 'add-rhythm-treble' in request.form:
-            lowerText = request.form['rhythm-lower']
-            upperText = request.form['rhythm-upper']
-            length = request.form['length']
-            noteOrRest = request.form['note-rest']
-            upperText += " " + noteOrRest
-            upperText += length
-            #return render_template('home.html', trebleRhythm=upperText, bassRhythm=lowerText)
-        elif 'add-rhythm-bass' in request.form:
-            lowerText = request.form['rhythm-lower']
-            upperText = request.form['rhythm-upper']
-            length = request.form['length']
-            noteOrRest = request.form['note-rest']
-            lowerText += " " + noteOrRest
-            lowerText += length
-            #return render_template('home.html', trebleRhythm=upperText, bassRhythm=lowerText)
-        elif 'file' in request.files:
+        if 'file' in request.files:
             file = request.files['file']
             if allowed_file(file.filename):
                 compileToPDF(file)

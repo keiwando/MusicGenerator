@@ -102,8 +102,6 @@
               <input type="radio" name="rhythm-compl" id="rhythm-compl-4" value="4" >
                 <label for="rhythm-compl-4" ><span></span>4</label></input>
 
-              <br>
-              <!--<input class="update-button" type="submit" name="update-button" value="UPDATE"></input>-->
             </form>
           </div> <!-- end rhythm setting-->
         </div>
@@ -111,8 +109,12 @@
         
 
         <form id="mainForm" action="." method="POST">
-          <input class="" type="number" name="rhythm-complexity" id="rhythm-complexity" min="1" max="4"></input>
           <input class="button randomButton" id="mainSubmit" type="submit" name="randomFile" value="RANDOM"></input>
+          <input class="hidden" type="number" name="rhythm-complexity" id="rhythm-complexity" min="1" max="4"></input>
+          <textarea class="hidden" id="hidden-rhythm-treble" name="hidden-rhythm-treble"></textarea>
+          <textarea class="hidden" id="hidden-rhythm-bass" name="hidden-rhythm-bass"></textarea>
+          <textarea class="hidden" id="hidden-melody-treble" name="hidden-melody-treble"></textarea>
+          <textarea class="hidden" id="hidden-melody-bass" name="hidden-melody-bass"></textarea>
         </form>
 
 	    </div>

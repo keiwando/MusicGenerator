@@ -1,26 +1,45 @@
 $(document).ready(function(){
 
+	/*if($('#mainForm').length > 0){
+		$('#mainForm').click(function(){
+			console.log("submitted");
+			var trebleRhythm = $('#upper-rhythm').val();
+			var bassRhythm = $('#lower-rhythm').val();
+			var input = $("<input>")
+				.attr("type", "hidden")
+            	.attr("rhythm-Treble", "rhythm-Treble").val(trebleRhythm);
+
+			$('#mainForm').append($(input));
+			input = $("<input>").attr("rhythm-bass", "bassRhythm").val(bassRhythm);
+			$('#mainForm').append($(input));
+		});
+	}*/
+
 	if($('#add-rhythm-treble').length > 0){
 		$('#add-rhythm-treble').click(function(){
 			var trebleStaff = $('#upper-rhythm');
+			var mainTrebleStaff = $('#hidden-rhythm-treble');
 			var upperText = trebleStaff.val();
 			var form = $('#rhythmInputByButton');
 			var length = form.find("input[type='radio'][name='length']:checked").val();
 			var noteOrRest = form.find("input[type='radio'][name='note-rest']:checked").val();
 			var result = upperText + " " + noteOrRest + length;
 			trebleStaff.val(result);
+			mainTrebleStaff.val(result);
 		});
 	}
 
 	if($('#add-rhythm-bass').length > 0){
 		$('#add-rhythm-bass').click(function(){
 			var bassStaff = $('#lower-rhythm');
+			var mainBassStaff = $('#hidden-rhythm-bass');
 			var upperText = bassStaff.val();
 			var form = $('#rhythmInputByButton');
 			var length = form.find("input[type='radio'][name='length']:checked").val();
 			var noteOrRest = form.find("input[type='radio'][name='note-rest']:checked").val();
 			var result = upperText + " " + noteOrRest + length;
 			bassStaff.val(result);
+			mainBassStaff.val(result);
 		});
 	}
 
