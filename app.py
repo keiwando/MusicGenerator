@@ -15,7 +15,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see http://www.gnu.org/licenses/.
 '''
 
-from flask import Flask, render_template, request, url_for, send_from_directory
+from flask import Flask, render_template, request, url_for, send_from_directory, json
 from werkzeug import secure_filename
 import webbrowser
 import os
@@ -48,17 +48,7 @@ def default():
 @app.route('/',methods=['POST','GET'])
 def home():
     if request.method == 'POST':
-        '''
-        if 'external' in request.form:
-            if 'file' in request.files:
-                file = request.files['file']
-                if allowed_file(file.filename):
-                    compileToPDF(file)
-                    return serve_static("Sheet.pdf")
-            else:
-                return "file not allowed"
-                '''
-
+       
         if 'add-rhythm-treble' in request.form:
             lowerText = request.form['rhythm-lower']
             upperText = request.form['rhythm-upper']
@@ -66,7 +56,7 @@ def home():
             noteOrRest = request.form['note-rest']
             upperText += " " + noteOrRest
             upperText += length
-            return render_template('home.html', trebleRhythm=upperText, bassRhythm=lowerText)
+            #return render_template('home.html', trebleRhythm=upperText, bassRhythm=lowerText)
         elif 'add-rhythm-bass' in request.form:
             lowerText = request.form['rhythm-lower']
             upperText = request.form['rhythm-upper']
@@ -74,7 +64,7 @@ def home():
             noteOrRest = request.form['note-rest']
             lowerText += " " + noteOrRest
             lowerText += length
-            return render_template('home.html', trebleRhythm=upperText, bassRhythm=lowerText)
+            #return render_template('home.html', trebleRhythm=upperText, bassRhythm=lowerText)
         elif 'file' in request.files:
             file = request.files['file']
             if allowed_file(file.filename):

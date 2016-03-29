@@ -52,7 +52,8 @@ input {
     border-radius: 5px;
 }
 
-input[type="submit"] {
+input[type="submit"],
+input[type="button"] {
 	font-size: 20px;
 	cursor: pointer;
 	margin: 5px;
@@ -148,30 +149,6 @@ textarea {
 	font-family: "OpenSans-Semibold"
 }
 
-::-webkit-input-placeholder {
-	text-align: center;
-	font-size: 20px;
-   	color: black;
-}
-
-:-moz-placeholder { /* Firefox 18- */
-	text-align: center;
-	font-size: 20px;
-   	color: black;  
-}
-
-::-moz-placeholder {  /* Firefox 19+ */
-	text-align: center;
-	font-size: 20px;
-   	color: black;  
-}
-
-:-ms-input-placeholder {
-	text-align: center; 
-	font-size: 20px; 
-   	color: black;  
-}
-
 a {
 	text-decoration: none;
 }
@@ -255,6 +232,54 @@ a:visited {
  z-index: 10;
  height: 3em;
  margin-top: -3em;
+}
+
+::-webkit-input-placeholder {
+	text-align: center;
+	font-size: 20px;
+   	color: black;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+	text-align: center;
+	font-size: 20px;
+   	color: black;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+	text-align: center;
+	font-size: 20px;
+   	color: black;  
+}
+
+:-ms-input-placeholder {
+	text-align: center; 
+	font-size: 20px; 
+   	color: black;  
+}
+
+.locked ::-webkit-input-placeholder {
+	text-align: center;
+	font-size: 20px;
+   	color: rgba(0,0,0,0.5);
+}
+
+.locked :-moz-placeholder { /* Firefox 18- */
+	text-align: center;
+	font-size: 20px;
+   	color: rgba(0,0,0,0.5); 
+}
+
+.locked ::-moz-placeholder {  /* Firefox 19+ */
+	text-align: center;
+	font-size: 20px;
+   	color: rgba(0,0,0,0.5); 
+}
+
+.locked :-ms-input-placeholder {
+	text-align: center; 
+	font-size: 20px; 
+   	color: rgba(0,0,0,0.5);
 }
 
 @media (max-width: 900px){

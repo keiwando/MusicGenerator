@@ -82,8 +82,8 @@
                   <label for="dotted"><span></span>DOTTED</label>
                 </input>  -->
 
-                <input type="submit" id="add-rhythm-treble" name="add-rhythm-treble" value="ADD Tr."></input>
-                <input type="submit" id="add-rhythm-bass" name="add-rhythm-bass" value="ADD Ba."></input>
+                <input type="button" id="add-rhythm-treble" name="add-rhythm-treble" value="ADD Tr."></input>
+                <input type="button" id="add-rhythm-bass" name="add-rhythm-bass" value="ADD Ba."></input>
                 <br>
                 <textarea class="rhythm-input" id="upper-rhythm" name="rhythm-upper" placeholder="Treble Staff">{{ trebleRhythm }}</textarea>
                 <textarea class="rhythm-input" id="lower-rhythm" name="rhythm-lower" placeholder="Bass Staff">{{ bassRhythm }}</textarea>
@@ -112,7 +112,7 @@
 
         <form id="mainForm" action="." method="POST">
           <input class="" type="number" name="rhythm-complexity" id="rhythm-complexity" min="1" max="4"></input>
-          <input class="button randomButton" type="submit" name="randomFile" value="RANDOM"></input>
+          <input class="button randomButton" id="mainSubmit" type="submit" name="randomFile" value="RANDOM"></input>
         </form>
 
 	    </div>

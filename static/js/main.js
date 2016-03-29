@@ -1,10 +1,28 @@
 $(document).ready(function(){
 
-	/*if($('#add-rhythm').length > 0){
-		$('#add-rhythm').click(function(){
-			$()
+	if($('#add-rhythm-treble').length > 0){
+		$('#add-rhythm-treble').click(function(){
+			var trebleStaff = $('#upper-rhythm');
+			var upperText = trebleStaff.val();
+			var form = $('#rhythmInputByButton');
+			var length = form.find("input[type='radio'][name='length']:checked").val();
+			var noteOrRest = form.find("input[type='radio'][name='note-rest']:checked").val();
+			var result = upperText + " " + noteOrRest + length;
+			trebleStaff.val(result);
 		});
-	}*/
+	}
+
+	if($('#add-rhythm-bass').length > 0){
+		$('#add-rhythm-bass').click(function(){
+			var bassStaff = $('#lower-rhythm');
+			var upperText = bassStaff.val();
+			var form = $('#rhythmInputByButton');
+			var length = form.find("input[type='radio'][name='length']:checked").val();
+			var noteOrRest = form.find("input[type='radio'][name='note-rest']:checked").val();
+			var result = upperText + " " + noteOrRest + length;
+			bassStaff.val(result);
+		});
+	}
 
 	if($('#rhythm-switch').length > 0){
 		$('#rhythm-switch input').on('change', function() {
@@ -61,7 +79,5 @@ $(document).ready(function(){
 			$('#rhythm-complexity').val(4);
 		});
 	}
-
-	
 
 });
