@@ -56,10 +56,18 @@ def home():
             else:
                 return render_template('home.html', result=False, invalid=True)
         elif 'randomFile' in request.form:
-            rhyCompl = random.randint(1,4)
-            melCompl = random.randint(1,6)
-            expCompl = random.randint(1,3)
-            MG.writeRandomLilyPondFile(rhyCompl,melCompl,expCompl)
+            #return str(request.form)
+            title = request.form['title']
+            rhyCompl = request.form['rhythm-complexity']
+            melCompl = request.form['melody-complexity']
+            expCompl = request.form['expression-complexity']
+            rhythmTreble = request.form['hidden-rhythm-treble']
+            rhythmBass = request.form['hidden-rhythm-bass']
+            melodyTreble = request.form['hidden-melody-treble']
+            melodyBass = request.form['hidden-melody-bass']
+            expTreble = request.form['hidden-expression-treble']
+            expBass = request.form['hidden-expression-bass']
+            return MG.writeSheet(title,rhyCompl,melCompl,expCompl,rhythmTreble,rhythmBass,melodyTreble,melodyBass,expTreble,expBass)
             compileFile.compile()
             return serve_static("Sheet.pdf")
         else:

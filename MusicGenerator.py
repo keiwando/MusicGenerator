@@ -134,26 +134,26 @@ class MelodyDecoder:
 
 	
 
-class ArticDecoder:
-	def __init__(self,artic,complexity):
+class ExpressionDecoder:
+	def __init__(self,Expression,complexity):
 		self.complexity = complexity
-		self.artic = artic
+		self.Expression = Expression
 		self.dynamics = ['ppp','pp','p','mp','mf','f','ff','fff','fp','sf','sp','sfz',"<",">","!"]
-		self.articulation = ['(',')','staccato','portato','trill','accent','tenuto', 'turn','fermata','prall', 'mordent','expressivo']
+		self.Expressionulation = ['(',')','staccato','portato','trill','accent','tenuto', 'turn','fermata','prall', 'mordent','expressivo']
 
 	def nextExpression(self):
-		dec = int(self.artic.next(1),2)
-		index = int(self.artic.next(4),2)
+		dec = int(self.Expression.next(1),2)
+		index = int(self.Expression.next(4),2)
 		if dec == 0:
 			index = index % len(self.dynamics)
 			return self.dynamics[index]
 		else:
-			index = index % len(self.articulation)
-			return self.articulation[index]
+			index = index % len(self.Expressionulation)
+			return self.Expressionulation[index]
 
 	def next(self):
 		
-		dec = int(self.artic.next(2),2)
+		dec = int(self.Expression.next(2),2)
 		comp = self.complexity
 		if comp == 1:
 			return ""
@@ -203,23 +203,30 @@ def generateRandomMelodyString():
 	melodyAsBinary = bin(melodyAsDecimal)[2:].zfill(length)
 	return melodyAsBinary
 
-def generateRandomArtOrnDynString():
+def generateRandomExpString():
 	length = 2400
 	maxDecimal = (2**length)
 	resultAsDecimal = random.randint(0,maxDecimal)
 	resultAsBinary = bin(resultAsDecimal)[2:].zfill(length)
 	return resultAsBinary
 
-def writeRandomLilyPondFile(rhythmCompl,melodyCompl,articCompl):
+def repeatListToSize(size,oldList):
+	newList = []
+	for i in range(0,size):
+		newList.append(oldList[i%len(oldList)])
+	return newList
+
+
+def writeRandomLilyPondFile(rhythmCompl,melodyCompl,ExpressionCompl):
 	rhythmString = generateRandomRhythmString()
 	melodyString = generateRandomMelodyString()
-	articString = generateRandomArtOrnDynString()
+	ExpressionString = generateRandomExpString()
 	rhythm = StringQueue(rhythmString)
 	melody = StringQueue(melodyString)
-	artic = StringQueue(articString)
+	Expression = StringQueue(ExpressionString)
 	rDecoder = RhythmDecoder(rhythm,rhythmCompl)
 	mDecoder = MelodyDecoder(melody,melodyCompl)
-	aDecoder = ArticDecoder(artic,articCompl)
+	aDecoder = ExpressionDecoder(Expression,ExpressionCompl)
 
 	musicUpper = ""
 	for i in range(0,150):
@@ -267,6 +274,108 @@ def writeLilyPondFile(upper,lower,filename,title):
 
 	file.close()
 
+def writeSheet(title,rhyCompl,melCompl,exprCompl,rhythmTreble,rhythmBass,melodyTreble,melodyBass,expressionTreble,expressionBass):
+	#rhythm
+	if rhyCompl == "0":
+		#rhythm from input
+		rhythmTreble = rhythmTreble.split()
+		rhythmBass = rhythmBass.split()
+		rhythmTreble = repeatListToSize(rhythmTreble,150)
+		rhythmBass = repeatListToSize(rhythmBass,150)
+	else: 
+		rhythmTreble = generateRandomRhythmString()
+		rhythmTreble = StringQueue(rhythmTreble)
+		decoder = RhythmDecoder(rhythmTreble,rhyCompl)
+		rhythmTreble = []
+		for i in range(0,150):
+			rhythmTreble.append(decoder.next())
+		
+		rhythmBass = generateRandomRhythmString()
+		rhythmBass = StringQueue(rhythmBass)
+		decoder = RhythmDecoder(rhythmBass,rhyCompl)
+		rhythmBass = []
+		for i in range(0,150):
+			rhythmBass.append(decoder.next())
+
+	#melody
+	if melCompl == "0":
+		melodyTreble = melodyTreble.split()
+		melodyBass = melodyBass.split()
+		melodyTreble = repeatListToSize(melodyTreble,300)
+		melodyBass = repeatListToSize(melodyBass,300)
+	else:
+		melodyTreble = generateRandomMelodyString()
+		melodyTreble = StringQueue(melodyTreble)
+		decoder = MelodyDecoder(melodyTreble,melCompl)
+		melodyTreble = []
+		for i in range(0,300):
+			melodyTreble.append(decoder.next())
+
+		melodyBass = generateRandomMelodyString()
+		melodyBass = StringQueue(melodyBass)
+		decoder = MelodyDecoder(melodyBass,melCompl)
+		melodyBass = []
+		for i in range(0,300):
+			melodyBass.append(decoder.next())
+
+	#expressions
+	if exprCompl == "0":
+		expressionTreble = expressionTreble.split()
+		expressionBass = expressionBass.split()
+		expressionTreble = repeatListToSize(expressionTreble,300)
+		expressionBass = repeatListToSize(expressionBass,300)
+	else:
+		expressionTreble = generateRandomExpString()
+		expressionTreble = StringQueue(expressionTreble)
+		decoder = ExpressionDecoder(expressionTreble,exprCompl)
+		expressionTreble = []
+		for i in range(0,300):
+			expressionTreble.append(decoder.next())
+
+		expressionBass = generateRandomExpString()
+		expressionBass = StringQueue(expressionBass)
+		decoder = ExpressionDecoder(expressionBass,exprCompl)
+		expressionBass = []
+		for i in range(0,300):
+			expressionBass.append(decoder.next())	
+
+
+	#create upper and lower staff
+	musicUpper = ""
+	musicLower = ""
+
+	for i in range(0,150):
+		beat = rhythmTreble[i]
+		#determine if note or rest
+		det = beat[0:1]
+		if det == "x":
+			#note
+			musicUpper += melodyTreble[i]
+			musicUpper += beat[1:]
+		else:
+			musicUpper += beat
+		#expressions
+		musicUpper += expressionTreble[i]
+		musicUpper += " "
+
+	for i in range(0,150):
+		beat = rhythmBass[i]
+		#determine if note or rest
+		det = beat[0:1]
+		if det == "x":
+			#note
+			musicLower += melodyBass[i]
+			musicLower += beat[1:]
+		else:
+			musicLower += beat
+		#expressions
+		musicLower += expressionBass[i]
+		musicLower += " "
+
+
+	return "Upper: " + musicUpper + " Lower: " + musicLower
+	#write lilypond file
+	writeLilyPondFile(musicUpper,musicLower,"Sheet",title)
 
 
 def writeTestFile():
@@ -298,10 +407,10 @@ def testMelodyDecoder():
 	for i in range(0,400):
 		print decoder.next("treble")
 
-def testArticDecoder():
-	testString = generateRandomArtOrnDynString()
-	artic = StringQueue(testString)
-	decoder = ArticDecoder(artic,3)
+def testExpressionDecoder():
+	testString = generateRandomExpString()
+	expression = StringQueue(testString)
+	decoder = ExpressionDecoder(expression,3)
 	for i in range (0,400):
 		print decoder.next()
 

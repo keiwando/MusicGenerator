@@ -146,7 +146,16 @@ textarea {
 	resize: none;
 	pointer-events: none;
 
+	font-size: 15px;
+
 	font-family: "OpenSans-Semibold"
+}
+
+#title {
+	width: 150px;
+	height: 40px;
+	font-size: 20px;
+	pointer-events: all;
 }
 
 a {

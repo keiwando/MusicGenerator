@@ -1,20 +1,5 @@
 $(document).ready(function(){
 
-	/*if($('#mainForm').length > 0){
-		$('#mainForm').click(function(){
-			console.log("submitted");
-			var trebleRhythm = $('#upper-rhythm').val();
-			var bassRhythm = $('#lower-rhythm').val();
-			var input = $("<input>")
-				.attr("type", "hidden")
-            	.attr("rhythm-Treble", "rhythm-Treble").val(trebleRhythm);
-
-			$('#mainForm').append($(input));
-			input = $("<input>").attr("rhythm-bass", "bassRhythm").val(bassRhythm);
-			$('#mainForm').append($(input));
-		});
-	}*/
-
 	if($('#add-rhythm-treble').length > 0){
 		$('#add-rhythm-treble').click(function(){
 			var trebleStaff = $('#upper-rhythm');
@@ -49,9 +34,12 @@ $(document).ready(function(){
    			if(value == "choice"){
    				$('.noteInput').removeClass("hidden");
    				$('#rhythm-random-form').addClass("hidden");
+   				$('#rhythm-complexity').val(0);
    			}else if(value == "random"){
    				$('.noteInput').addClass("hidden");
    				$('#rhythm-random-form').removeClass("hidden");
+   				var value = $('input[name="rhythm-compl"]:checked', '#rhythm-random-form').val();
+				$('#rhythm-complexity').val(value);
    			}else{
    				alert("value not known");
    			}
@@ -84,6 +72,17 @@ $(document).ready(function(){
 	}
 
 	if($('.random-rhythm-form').length > 0){
+		$('#rhythm-complexity').val(0);	//initialize
+		$('input[name="rhythm-compl"]').click(function(){
+			var value = $('input[name="rhythm-compl"]:checked', '#rhythm-random-form').val();
+			$('#rhythm-complexity').val(value);
+		});
+	}
+
+	$('#melody-complexity').val(0);
+	$('#expression-complexity').val(0);
+
+	/*if($('.random-rhythm-form').length > 0){
 		$('#rhythm-complexity').val(1);
 		$('#rhythm-compl-1').click(function(){
 			$('#rhythm-complexity').val(1);
@@ -98,5 +97,6 @@ $(document).ready(function(){
 			$('#rhythm-complexity').val(4);
 		});
 	}
+	*/
 
 });

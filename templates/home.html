@@ -109,12 +109,19 @@
         
 
         <form id="mainForm" action="." method="POST">
+          <textarea id="title" name="title" placeholder="Title"></textarea>
+          <br>
           <input class="button randomButton" id="mainSubmit" type="submit" name="randomFile" value="RANDOM"></input>
-          <input class="hidden" type="number" name="rhythm-complexity" id="rhythm-complexity" min="1" max="4"></input>
+          <input class="" type="number" name="rhythm-complexity" id="rhythm-complexity" min="0" max="4"></input>
+          <input class="hidden" type="number" name="melody-complexity" id="melody-complexity" min="0" max="4"></input>
+          <input class="hidden" type="number" name="expression-complexity" id="expression-complexity" min="0" max="4"></input>
           <textarea class="hidden" id="hidden-rhythm-treble" name="hidden-rhythm-treble"></textarea>
           <textarea class="hidden" id="hidden-rhythm-bass" name="hidden-rhythm-bass"></textarea>
           <textarea class="hidden" id="hidden-melody-treble" name="hidden-melody-treble"></textarea>
           <textarea class="hidden" id="hidden-melody-bass" name="hidden-melody-bass"></textarea>
+          <textarea class="hidden" id="hidden-expression-treble" name="hidden-expressio-treble"></textarea>
+          <textarea class="hidden" id="hidden-expression-bass" name="hidden-expressio-bass"></textarea>
+          
         </form>
 
 	    </div>
