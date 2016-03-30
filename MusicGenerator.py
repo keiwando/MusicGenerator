@@ -291,14 +291,14 @@ def writeSheet(title,rhyCompl,melCompl,exprCompl,rhythmTreble,rhythmBass,melodyT
 	else: 
 		rhythmTreble = generateRandomRhythmString()
 		rhythmTreble = StringQueue(rhythmTreble)
-		decoder = RhythmDecoder(rhythmTreble,rhyCompl)
+		decoder = RhythmDecoder(rhythmTreble,int(rhyCompl))
 		rhythmTreble = []
 		for i in range(0,150):
 			rhythmTreble.append(decoder.next())
 		
 		rhythmBass = generateRandomRhythmString()
 		rhythmBass = StringQueue(rhythmBass)
-		decoder = RhythmDecoder(rhythmBass,rhyCompl)
+		decoder = RhythmDecoder(rhythmBass,int(rhyCompl))
 		rhythmBass = []
 		for i in range(0,150):
 			rhythmBass.append(decoder.next())
@@ -318,14 +318,14 @@ def writeSheet(title,rhyCompl,melCompl,exprCompl,rhythmTreble,rhythmBass,melodyT
 	else:
 		melodyTreble = generateRandomMelodyString()
 		melodyTreble = StringQueue(melodyTreble)
-		decoder = MelodyDecoder(melodyTreble,melCompl)
+		decoder = MelodyDecoder(melodyTreble,int(melCompl))
 		melodyTreble = []
 		for i in range(0,300):
 			melodyTreble.append(decoder.next())
 
 		melodyBass = generateRandomMelodyString()
 		melodyBass = StringQueue(melodyBass)
-		decoder = MelodyDecoder(melodyBass,melCompl)
+		decoder = MelodyDecoder(melodyBass,int(melCompl))
 		melodyBass = []
 		for i in range(0,300):
 			melodyBass.append(decoder.next())
@@ -345,14 +345,14 @@ def writeSheet(title,rhyCompl,melCompl,exprCompl,rhythmTreble,rhythmBass,melodyT
 	else:
 		expressionTreble = generateRandomExpString()
 		expressionTreble = StringQueue(expressionTreble)
-		decoder = ExpressionDecoder(expressionTreble,exprCompl)
+		decoder = ExpressionDecoder(expressionTreble,int(exprCompl))
 		expressionTreble = []
 		for i in range(0,300):
 			expressionTreble.append(decoder.next())
 
 		expressionBass = generateRandomExpString()
 		expressionBass = StringQueue(expressionBass)
-		decoder = ExpressionDecoder(expressionBass,exprCompl)
+		decoder = ExpressionDecoder(expressionBass,int(exprCompl))
 		expressionBass = []
 		for i in range(0,300):
 			expressionBass.append(decoder.next())	
