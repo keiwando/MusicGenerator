@@ -210,7 +210,7 @@ def generateRandomExpString():
 	resultAsBinary = bin(resultAsDecimal)[2:].zfill(length)
 	return resultAsBinary
 
-def repeatListToSize(size,oldList):
+def repeatListToSize(oldList,size):
 	newList = []
 	for i in range(0,size):
 		newList.append(oldList[i%len(oldList)])
@@ -280,6 +280,12 @@ def writeSheet(title,rhyCompl,melCompl,exprCompl,rhythmTreble,rhythmBass,melodyT
 		#rhythm from input
 		rhythmTreble = rhythmTreble.split()
 		rhythmBass = rhythmBass.split()
+
+		if len(rhythmTreble) == 0:
+			rhythmTreble = ['x4']
+		if len(rhythmBass) == 0:
+			rhythmBass = ['x4']
+
 		rhythmTreble = repeatListToSize(rhythmTreble,150)
 		rhythmBass = repeatListToSize(rhythmBass,150)
 	else: 
@@ -301,6 +307,12 @@ def writeSheet(title,rhyCompl,melCompl,exprCompl,rhythmTreble,rhythmBass,melodyT
 	if melCompl == "0":
 		melodyTreble = melodyTreble.split()
 		melodyBass = melodyBass.split()
+
+		if len(melodyTreble) == 0:
+			melodyTreble = ['c\'']
+		if len(melodyBass)  == 0:
+			melodyBass = ['c']
+
 		melodyTreble = repeatListToSize(melodyTreble,300)
 		melodyBass = repeatListToSize(melodyBass,300)
 	else:
@@ -322,6 +334,12 @@ def writeSheet(title,rhyCompl,melCompl,exprCompl,rhythmTreble,rhythmBass,melodyT
 	if exprCompl == "0":
 		expressionTreble = expressionTreble.split()
 		expressionBass = expressionBass.split()
+
+		if len(expressionTreble) == 0:
+			expressionTreble = ['']
+		if len(expressionBass) == 0:
+			expressionBass = ['']
+
 		expressionTreble = repeatListToSize(expressionTreble,300)
 		expressionBass = repeatListToSize(expressionBass,300)
 	else:
@@ -372,8 +390,8 @@ def writeSheet(title,rhyCompl,melCompl,exprCompl,rhythmTreble,rhythmBass,melodyT
 		musicLower += expressionBass[i]
 		musicLower += " "
 
-
-	return "Upper: " + musicUpper + " Lower: " + musicLower
+	#print musicUpper
+	#return "Upper: " + musicUpper + " Lower: " + musicLower
 	#write lilypond file
 	writeLilyPondFile(musicUpper,musicLower,"Sheet",title)
 
