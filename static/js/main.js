@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+	//input add buttons
+
 	if($('#add-rhythm-treble').length > 0){
 		$('#add-rhythm-treble').click(function(){
 			var trebleStaff = $('#upper-rhythm');
@@ -28,15 +30,74 @@ $(document).ready(function(){
 		});
 	}
 
+
+	if($('#add-melody-treble').length > 0){
+		$('#add-melody-treble').click(function(){
+			var trebleStaff = $('#upper-melody');
+			var mainTrebleStaff = $('#hidden-melody-treble');
+			var upperText = trebleStaff.val();
+			var form = $('#melodyInputByButton');
+			var octave = form.find("input[type='radio'][name='octave']:checked").val();
+			var tone = form.find("input[type='radio'][name='base-tone']:checked").val();
+			var accidental = form.find("input[type='radio'][name='accidental']:checked").val();
+			var baseOctave = 2;
+			diff = parseInt(octave) - baseOctave;
+			octave = "";
+			if(diff > 0){
+				for(i = 0; i < diff; i++){
+					octave += "\'";
+				}
+			}else if(diff < 0){
+				for(i = 0; i > diff; i--){
+					octave += ",";
+				}
+			}
+
+			var result = upperText + " " + tone + accidental + octave;
+			trebleStaff.val(result);
+			mainTrebleStaff.val(result);
+		});
+	}
+
+	if($('#add-melody-bass').length > 0){
+		$('#add-melody-bass').click(function(){
+			var trebleStaff = $('#lower-melody');
+			var mainTrebleStaff = $('#hidden-melody-bass');
+			var upperText = trebleStaff.val();
+			var form = $('#melodyInputByButton');
+			var octave = form.find("input[type='radio'][name='octave']:checked").val();
+			var tone = form.find("input[type='radio'][name='base-tone']:checked").val();
+			var accidental = form.find("input[type='radio'][name='accidental']:checked").val();
+			var baseOctave = 2;
+			diff = parseInt(octave) - baseOctave;
+			octave = "";
+			if(diff > 0){
+				for(i = 0; i < diff; i++){
+					octave += "\'";
+				}
+			}else if(diff < 0){
+				for(i = 0; i > diff; i--){
+					octave += ",";
+				}
+			}
+
+			var result = upperText + " " + tone + accidental + octave;
+			trebleStaff.val(result);
+			mainTrebleStaff.val(result);
+		});
+	}
+
+	//switches
+
 	if($('#rhythm-switch').length > 0){
 		$('#rhythm-switch input').on('change', function() {
    			var value = $('input[name="rhythm-choice-switch"]:checked', '#rhythm-switch').val();
    			if(value == "choice"){
-   				$('.noteInput').removeClass("hidden");
+   				$('.noteInput-rhythm').removeClass("hidden");
    				$('#rhythm-random-form').addClass("hidden");
    				$('#rhythm-complexity').val(0);
    			}else if(value == "random"){
-   				$('.noteInput').addClass("hidden");
+   				$('.noteInput-rhythm').addClass("hidden");
    				$('#rhythm-random-form').removeClass("hidden");
    				var value = $('input[name="rhythm-compl"]:checked', '#rhythm-random-form').val();
 				$('#rhythm-complexity').val(value);
@@ -46,6 +107,26 @@ $(document).ready(function(){
 		});
 	}
 
+	if($('#melody-switch').length > 0){
+		$('#melody-switch input').on('change', function() {
+   			var value = $('input[name="melody-choice-switch"]:checked', '#melody-switch').val();
+   			if(value == "choice"){
+   				$('.noteInput-melody').removeClass("hidden");
+   				$('#melody-random-form').addClass("hidden");
+   				$('#melody-complexity').val(0);
+   			}else if(value == "random"){
+   				$('.noteInput-melody').addClass("hidden");
+   				$('#melody-random-form').removeClass("hidden");
+   				var value = $('input[name="melody-compl"]:checked', '#melody-random-form').val();
+				$('#melody-complexity').val(value);
+   			}else{
+   				alert("value not known");
+   			}
+		});
+	}
+
+	// lock
+
 	if($('.lock').length > 0){
 		$('.lock').each(function(){
 			var currentLock = $(this)
@@ -54,18 +135,26 @@ $(document).ready(function(){
 					//lock
 					$(this).addClass("hidden");
 					currentLock.find('.locked-img').removeClass("hidden");
+
+					var input = $(this).parent().parent().find('.input');
+					var swtch = $(this).parent().parent().find('.switch');
+					var randomForm = $(this).parent().parent().find('.random-form');
 					
-					$('#rhythm-switch').addClass("locked");
-					$('.noteInput').addClass("locked");
-					$('.random-form').addClass("locked");
+					swtch.addClass("locked");
+					input.addClass("locked");
+					randomForm.addClass("locked");
 				}else{
 					//unlock
 					$(this).addClass("hidden");
 					currentLock.find('.unlocked-img').removeClass("hidden");
+
+					var input = $(this).parent().parent().find('.input');
+					var swtch = $(this).parent().parent().find('.switch');
+					var randomForm = $(this).parent().parent().find('.random-form');
 					
-					$('#rhythm-switch').removeClass("locked");
-					$('.noteInput').removeClass("locked");
-					$('.random-form').removeClass("locked");
+					swtch.removeClass("locked");
+					input.removeClass("locked");
+					randomForm.removeClass("locked");
 				}
 			});
 		});
@@ -79,7 +168,14 @@ $(document).ready(function(){
 		});
 	}
 
-	$('#melody-complexity').val(0);
+	if($('.random-melody-form').length > 0){
+		$('#melody-complexity').val(0);	//initialize
+		$('input[name="melody-compl"]').click(function(){
+			var value = $('input[name="melody-compl"]:checked', '#melody-random-form').val();
+			$('#melody-complexity').val(value);
+		});
+	}
+
 	$('#expression-complexity').val(0);
 
 	/*if($('.random-rhythm-form').length > 0){

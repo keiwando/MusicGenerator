@@ -54,7 +54,7 @@
             </div>
             
 
-            <div class="noteInput">
+            <div class="noteInput-rhythm input">
               <form id="rhythmInputByButton" action="." method="POST">
                 <input type="radio" name="note-rest" id="note-rest-x" value="x" checked>
                   <label for="note-rest-x" ><span></span>NOTE</label></input>
@@ -62,7 +62,7 @@
                   <label for="note-rest-r" ><span></span>REST</label></input>
                 <div id="lengthChoice">
                   <input type="radio" name="length" id="length1" value="1">
-                    <label for="length1"><span></span>1</label></input>
+                    <label for="length1">LENGTH<br><span></span>1</label></input>
                   <input type="radio" name="length" id="length2" value="2">
                     <label for="length2"><span></span>2</label></input>
                   <input type="radio" name="length" id="length4" value="4" checked>
@@ -85,8 +85,8 @@
                 <input type="button" id="add-rhythm-treble" name="add-rhythm-treble" value="ADD Tr."></input>
                 <input type="button" id="add-rhythm-bass" name="add-rhythm-bass" value="ADD Ba."></input>
                 <br>
-                <textarea class="rhythm-input" id="upper-rhythm" name="rhythm-upper" placeholder="Treble Staff">{{ trebleRhythm }}</textarea>
-                <textarea class="rhythm-input" id="lower-rhythm" name="rhythm-lower" placeholder="Bass Staff">{{ bassRhythm }}</textarea>
+                <textarea class="rhythm-input" id="upper-rhythm" name="rhythm-upper" placeholder="Treble Staff"></textarea>
+                <textarea class="rhythm-input" id="lower-rhythm" name="rhythm-lower" placeholder="Bass Staff"></textarea>
               </form>
               
             </div>
@@ -104,6 +104,105 @@
 
             </form>
           </div> <!-- end rhythm setting-->
+
+          <div class="melodySetting setting">
+            <h2>MELODY</h2>
+            
+            <div class="lock" id="rhythm-lock">
+              <img class="unlocked-img" src="{{url_for('static',filename="images/lock-unlocked.png")}}">
+              <img class="locked-img hidden" src="{{url_for('static',filename="images/lock-locked.png")}}">
+            </div>
+
+            <div class="switch" id="melody-switch">
+                <input type="radio" name="melody-choice-switch" id="melody-choice-input" value="choice" checked>
+                  <label for="melody-choice-input">BY INPUT    <span></span></label>
+                </input>
+
+                <input type="radio" name="melody-choice-switch" id="melody-choice-random" value="random">
+                  <label for="melody-choice-random"><span></span>   RANDOM</label>
+                </input> 
+            </div>
+            
+
+            <div class="noteInput-melody input">
+              <form id="melodyInputByButton" action="." method="POST">
+                <input type="radio" name="accidental" id="acc-double-flat" value="eses">
+                  <label for="acc-double-flat" ><span></span>bb</label></input>
+                <input type="radio" name="accidental" id="acc-flat" value="es">
+                  <label for="acc-flat" ><span></span>b</label></input>
+                <input type="radio" name="accidental" id="acc-natural" value="" checked>
+                  <label for="acc-natural" ><span></span>NATURAL</label></input>
+                <input type="radio" name="accidental" id="acc-sharp" value="is">
+                  <label for="acc-sharp" ><span></span>#</label></input>
+                <input type="radio" name="accidental" id="acc-double-sharp" value="isis">
+                  <label for="acc-double-sharp" ><span></span>##</label></input>
+                
+
+                <br>
+                <input type="radio" name="base-tone" id="base-tone-c" value="c" checked>
+                  <label for="base-tone-c"><span></span>C</label></input>
+                <input type="radio" name="base-tone" id="base-tone-d" value="d">
+                  <label for="base-tone-d"><span></span>D</label></input>
+                <input type="radio" name="base-tone" id="base-tone-e" value="e">
+                  <label for="base-tone-e"><span></span>E</label></input>
+                <input type="radio" name="base-tone" id="base-tone-f" value="f">
+                  <label for="base-tone-f"><span></span>F</label></input>
+                <input type="radio" name="base-tone" id="base-tone-g" value="g">
+                  <label for="base-tone-g"><span></span>G</label></input>
+                <input type="radio" name="base-tone" id="base-tone-a" value="a">
+                  <label for="base-tone-a"><span></span>A</label></input>
+                <input type="radio" name="base-tone" id="base-tone-b" value="b">
+                  <label for="base-tone-b"><span></span>B</label></input>
+
+                <div id="octaveChoice">
+                  <input type="radio" name="octave" id="octave0" value="0">
+                    <label for="octave0">OCTAVE<br><span></span>0</label></input>
+                  <input type="radio" name="octave" id="octave1" value="1">
+                    <label for="octave1"><span></span>1</label></input>
+                  <input type="radio" name="octave" id="octave2" value="2">
+                    <label for="octave2"><span></span>2</label></input>
+                  <input type="radio" name="octave" id="octave3" value="3" checked>
+                    <label for="octave3"><span></span>3</label></input>
+                  <input type="radio" name="octave" id="octave4" value="4">
+                    <label for="octave4"><span></span>4</label></input>
+                  <input type="radio" name="octave" id="octave5" value="5">
+                    <label for="octave5"><span></span>5</label></input>
+                  <input type="radio" name="octave" id="octave6" value="6">
+                    <label for="octave6"><span></span>6</label></input>
+                  <input type="radio" name="octave" id="octave7" value="7">
+                    <label for="octave7"><span></span>7</label></input>
+                </div>
+                <!--<input type="radio" name="dotted" id="dotted" value="dot">
+                  <label for="dotted"><span></span>DOTTED</label>
+                </input>  -->
+
+                <input type="button" id="add-melody-treble" name="add-melody-treble" value="ADD Tr."></input>
+                <input type="button" id="add-melody-bass" name="add-melody-bass" value="ADD Ba."></input>
+                <br>
+                <textarea class="melody-input" id="upper-melody" name="melody-upper" placeholder="Treble Staff"></textarea>
+                <textarea class="melody-input" id="lower-melody" name="melody-lower" placeholder="Bass Staff"></textarea>
+              </form>
+              
+            </div>
+
+            <form class="random-form random-melody-form hidden" id="melody-random-form" action="." method="POST">
+              <label>COMPLEXITY</label>
+              <input type="radio" name="melody-compl" id="melody-compl-1" value="1" checked>
+                <label for="melody-compl-1" ><span></span>1</label></input>
+              <input type="radio" name="melody-compl" id="melody-compl-2" value="2">
+                <label for="melody-compl-2" ><span></span>2</label></input>
+              <input type="radio" name="melody-compl" id="melody-compl-3" value="3" >
+                <label for="melody-compl-3" ><span></span>3</label></input>
+              <input type="radio" name="melody-compl" id="melody-compl-4" value="4" >
+                <label for="melody-compl-4" ><span></span>4</label></input>
+              <input type="radio" name="melody-compl" id="melody-compl-5" value="5" >
+                <label for="melody-compl-5" ><span></span>5</label></input>
+              <input type="radio" name="melody-compl" id="melody-compl-6" value="6" >
+                <label for="melody-compl-6" ><span></span>6</label></input>
+
+            </form>
+          </div> <!-- end MELODY setting-->
+
         </div>
 
         
@@ -112,8 +211,8 @@
           <textarea id="title" name="title" placeholder="Title"></textarea>
           <br>
           <input class="button randomButton" id="mainSubmit" type="submit" name="randomFile" value="RANDOM"></input>
-          <input class="" type="number" name="rhythm-complexity" id="rhythm-complexity" min="0" max="4"></input>
-          <input class="hidden" type="number" name="melody-complexity" id="melody-complexity" min="0" max="4"></input>
+          <input class="hidden" type="number" name="rhythm-complexity" id="rhythm-complexity" min="0" max="4"></input>
+          <input class="hidden" type="number" name="melody-complexity" id="melody-complexity" min="0" max="6"></input>
           <input class="hidden" type="number" name="expression-complexity" id="expression-complexity" min="0" max="4"></input>
           <textarea class="hidden" id="hidden-rhythm-treble" name="hidden-rhythm-treble"></textarea>
           <textarea class="hidden" id="hidden-rhythm-bass" name="hidden-rhythm-bass"></textarea>
