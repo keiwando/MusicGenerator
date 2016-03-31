@@ -322,14 +322,14 @@ def writeSheet(title,rhyCompl,melCompl,exprCompl,rhythmTreble,rhythmBass,melodyT
 		decoder = MelodyDecoder(melodyTreble,int(melCompl))
 		melodyTreble = []
 		for i in range(0,300):
-			melodyTreble.append(decoder.next())
+			melodyTreble.append(decoder.next("treble"))
 
 		melodyBass = generateRandomMelodyString()
 		melodyBass = StringQueue(melodyBass)
 		decoder = MelodyDecoder(melodyBass,int(melCompl))
 		melodyBass = []
 		for i in range(0,300):
-			melodyBass.append(decoder.next())
+			melodyBass.append(decoder.next("bass"))
 
 	#expressions
 	if exprCompl == "0":
