@@ -362,10 +362,10 @@ def writeSheet(title,rhyCompl,melCompl,exprCompl,rhythmTreble,rhythmBass,melodyT
 	#create upper and lower staff
 	musicUpper = ""
 	musicLower = ""
-	melodyTreble = deque(melodyTreble)
-	melodyBass = deque(melodyBass)
-	expressionTreble = deque(expressionTreble)
-	expressionBass = deque(expressionBass)
+	melodyTreble = deque(melodyTreble).reverse()
+	melodyBass = deque(melodyBass).reverse()
+	expressionTreble = deque(expressionTreble).reverse()
+	expressionBass = deque(expressionBass).reverse()
 
 	for i in range(0,150):
 		beat = rhythmTreble[i]
