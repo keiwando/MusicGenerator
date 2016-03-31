@@ -4,6 +4,7 @@ Creates Lilypond Files Based On Input or 'Randomly'.
 
 import os
 import random
+from collections import deque
 
 FILEPATH = os.path.dirname(__file__)
 FILEPATH = os.path.join(FILEPATH,"static","Lilypond-Files")
@@ -361,6 +362,10 @@ def writeSheet(title,rhyCompl,melCompl,exprCompl,rhythmTreble,rhythmBass,melodyT
 	#create upper and lower staff
 	musicUpper = ""
 	musicLower = ""
+	melodyTreble = deque(melodyTreble)
+	melodyBass = deque(melodyBass)
+	expressionTreble = deque(expressionTreble)
+	expressionBass = deque(expressionBass)
 
 	for i in range(0,150):
 		beat = rhythmTreble[i]
@@ -368,12 +373,12 @@ def writeSheet(title,rhyCompl,melCompl,exprCompl,rhythmTreble,rhythmBass,melodyT
 		det = beat[0:1]
 		if det == "x":
 			#note
-			musicUpper += melodyTreble[i]
+			musicUpper += melodyTreble.pop()
 			musicUpper += beat[1:]
 		else:
 			musicUpper += beat
 		#expressions
-		musicUpper += expressionTreble[i]
+		musicUpper += expressionTreble.pop()
 		musicUpper += " "
 
 	for i in range(0,150):
@@ -382,12 +387,12 @@ def writeSheet(title,rhyCompl,melCompl,exprCompl,rhythmTreble,rhythmBass,melodyT
 		det = beat[0:1]
 		if det == "x":
 			#note
-			musicLower += melodyBass[i]
+			musicLower += melodyBass.pop()
 			musicLower += beat[1:]
 		else:
 			musicLower += beat
 		#expressions
-		musicLower += expressionBass[i]
+		musicLower += expressionBass.pop()
 		musicLower += " "
 
 	#print musicUpper
