@@ -10,7 +10,13 @@ $(document).ready(function(){
 			var form = $('#rhythmInputByButton');
 			var length = form.find("input[type='radio'][name='length']:checked").val();
 			var noteOrRest = form.find("input[type='radio'][name='note-rest']:checked").val();
-			var result = upperText + " " + noteOrRest + length;
+			var dotted = form.find("input[type='checkbox'][name='dotted']").is(':checked');
+			if(dotted){
+				dotted = ".";
+			}else{
+				dotted = "";
+			}
+			var result = upperText + " " + noteOrRest + length + dotted;
 			trebleStaff.val(result);
 			mainTrebleStaff.val(result);
 		});
@@ -24,7 +30,13 @@ $(document).ready(function(){
 			var form = $('#rhythmInputByButton');
 			var length = form.find("input[type='radio'][name='length']:checked").val();
 			var noteOrRest = form.find("input[type='radio'][name='note-rest']:checked").val();
-			var result = upperText + " " + noteOrRest + length;
+			var dotted = form.find("input[type='checkbox'][name='dotted']").is(':checked');
+			if(dotted){
+				dotted = ".";
+			}else{
+				dotted = "";
+			}
+			var result = upperText + " " + noteOrRest + length + dotted;
 			bassStaff.val(result);
 			mainBassStaff.val(result);
 		});
@@ -84,6 +96,76 @@ $(document).ready(function(){
 			var result = upperText + " " + tone + accidental + octave;
 			trebleStaff.val(result);
 			mainTrebleStaff.val(result);
+		});
+	}
+
+	//input remove buttons
+
+	if($('#rm-treble-rhythm').length > 0){
+		$('#rm-treble-rhythm').click(function(){
+			var staff = $('#upper-rhythm');
+			var mainStaff = $('#hidden-rhythm-treble');
+			var text = staff.val();
+
+			var parts = text.split(" ");
+			text = parts[0];
+			for(i = 1; i < parts.length - 1; i++){
+				text += " ";
+				text += parts[i];
+			}
+			staff.val(text);
+			mainStaff.val(text);
+		});
+	}
+
+	if($('#rm-bass-rhythm').length > 0){
+		$('#rm-bass-rhythm').click(function(){
+			var staff = $('#lower-rhythm');
+			var mainStaff = $('#hidden-rhythm-bass');
+			var text = staff.val();
+
+			var parts = text.split(" ");
+			text = parts[0];
+			for(i = 1; i < parts.length - 1; i++){
+				text += " ";
+				text += parts[i];
+			}
+			staff.val(text);
+			mainStaff.val(text);
+		});
+	}
+
+	if($('#rm-treble-melody').length > 0){
+		$('#rm-treble-melody').click(function(){
+			var staff = $('#upper-melody');
+			var mainStaff = $('#hidden-melody-treble');
+			var text = staff.val();
+
+			var parts = text.split(" ");
+			text = parts[0];
+			for(i = 1; i < parts.length - 1; i++){
+				text += " ";
+				text += parts[i];
+			}
+			staff.val(text);
+			mainStaff.val(text);
+		});
+	}
+
+	if($('#rm-bass-melody').length > 0){
+		$('#rm-bass-melody').click(function(){
+			var staff = $('#lower-melody');
+			var mainStaff = $('#hidden-melody-bass');
+			var text = staff.val();
+
+			var parts = text.split(" ");
+			text = parts[0];
+			for(i = 1; i < parts.length - 1; i++){
+				text += " ";
+				text += parts[i];
+			}
+			staff.val(text);
+			mainStaff.val(text);
 		});
 	}
 

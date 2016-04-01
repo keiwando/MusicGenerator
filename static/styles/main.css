@@ -59,17 +59,20 @@ input[type="button"] {
 	margin: 5px;
 }
 
-input[type="radio"] {
+input[type="radio"], 
+input[type="checkbox"]{
 	display: none;
 }
 
-input[type="radio"] + label {
+input[type="radio"] + label, 
+input[type="checkbox"] + label {
 	color: black;
 	font-family: "OpenSans-Semibold";
 	font-size: 15px;
 }
 
-input[type="radio"] + label span {
+input[type="radio"] + label span,
+input[type="checkbox"] + label span {
 	display: inline-block;
 	width: 20px;
 	height: 20px;
@@ -81,12 +84,15 @@ input[type="radio"] + label span {
 	background-color: white;
 }
 
-input[type="radio"]:checked + label span {
+input[type="radio"]:checked + label span,
+input[type="checkbox"]:checked + label span {
 	background-color: black;
 }
 
 input[type="radio"] + label span,
-input[type="radio"]:checked + label span {
+input[type="radio"]:checked + label span,
+input[type="checkbox"] + label span,
+input[type="checkbox"]:checked + label span {
   -webkit-transition:background-color 0.1s linear;
   -o-transition:background-color 0.1s linear;
   -moz-transition:background-color 0.1s linear;
@@ -110,16 +116,19 @@ input[type="radio"]:checked + label span {
 	border-color: rgba(0,0,0,0.4);
 }
 
-.locked input[type="radio"] + label{
+.locked input[type="radio"] + label,
+.locked input[type="checkbox"] + label{
 	color: rgba(0,0,0,0.4);
 	border-color: rgba(0,0,0,0.4);
 }
 
-.locked input[type="radio"] + label span {
+.locked input[type="radio"] + label span,
+.locked input[type="checkbox"] + label span  {
 	border-color: rgba(0,0,0,0.4);
 }
 
-.locked input[type="radio"]:checked + label span {
+.locked input[type="radio"]:checked + label span,
+.locked input[type="checkbox"]:checked + label span {
 	border-color: rgba(0,0,0,0);
 	background-color: rgba(0,0,0,0.4);
 }
@@ -218,9 +227,6 @@ a:visited {
 	margin: 20px;
 }
 
-.rhythmSetting {
-}
-
 #links {
     float: bottom;
     margin: 20px auto;
@@ -291,10 +297,45 @@ a:visited {
    	color: rgba(0,0,0,0.5);
 }
 
-@media (max-width: 900px){
+@media (max-width: 1000px){
 	html,body,#container {
 		text-align: center;
 		height: auto;
+
+	}
+
+	.settings-container {
+		display: block;
 	}
 
 }
+
+@media (max-width: 600px){
+	html,body,#container {
+		text-align: center;
+		height: auto;
+		content-align: middle;
+	}
+
+	.settings-container {
+		display: block;
+	}
+
+	.setting {
+		display: inline-block;
+		width: 450px;
+		margin: 0px;
+		margin-top: 20px;
+		margin-bottom: 20px;
+	}
+
+}
+
+
+
+
+
+
+
+
+
