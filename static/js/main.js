@@ -2,6 +2,9 @@ $(document).ready(function(){
 
 	//input add buttons
 
+	window.inChordTreble = false;
+	window.inChordBass = false;
+
 	if($('#add-rhythm-treble').length > 0){
 		$('#add-rhythm-treble').click(function(){
 			var trebleStaff = $('#upper-rhythm');
@@ -52,6 +55,7 @@ $(document).ready(function(){
 			var octave = form.find("input[type='radio'][name='octave']:checked").val();
 			var tone = form.find("input[type='radio'][name='base-tone']:checked").val();
 			var accidental = form.find("input[type='radio'][name='accidental']:checked").val();
+			var chord = form.find("input[type='checkbox'][name='chord']").is(':checked');
 			var baseOctave = 2;
 			diff = parseInt(octave) - baseOctave;
 			octave = "";
@@ -65,7 +69,18 @@ $(document).ready(function(){
 				}
 			}
 
-			var result = upperText + " " + tone + accidental + octave;
+			//chord has to include space character!
+			if(chord && !window.inChordTreble){
+				chord = " <";
+				window.inChordTreble = true;
+			}else if(!chord && window.inChordTreble){
+				chord = "> ";
+				window.inChordTreble = false;
+			}else{
+				chord = " ";
+			}
+
+			var result = upperText + chord + tone + accidental + octave;
 			trebleStaff.val(result);
 			mainTrebleStaff.val(result);
 		});
@@ -80,6 +95,7 @@ $(document).ready(function(){
 			var octave = form.find("input[type='radio'][name='octave']:checked").val();
 			var tone = form.find("input[type='radio'][name='base-tone']:checked").val();
 			var accidental = form.find("input[type='radio'][name='accidental']:checked").val();
+			var chord = form.find("input[type='checkbox'][name='chord']").is(':checked');
 			var baseOctave = 2;
 			diff = parseInt(octave) - baseOctave;
 			octave = "";
@@ -93,7 +109,18 @@ $(document).ready(function(){
 				}
 			}
 
-			var result = upperText + " " + tone + accidental + octave;
+			//chord has to include space character!
+			if(chord && !window.inChordBass){
+				chord = " <";
+				window.inChordBass = true;
+			}else if(!chord && window.inChordBass){
+				chord = "> ";
+				window.inChordBass = false;
+			}else{
+				chord = " ";
+			}
+
+			var result = upperText + chord + tone + accidental + octave;
 			trebleStaff.val(result);
 			mainTrebleStaff.val(result);
 		});
