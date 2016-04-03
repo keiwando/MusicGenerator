@@ -232,10 +232,11 @@ def getNextMelodyOrChord(melody):
 		counter += 1
 		while last != ">" and len(melody) > 0 and counter < maxNotesInChord:
 			nextNote = melody.pop()
-			peek = melody[-1]
+			if len(melody) > 0:
+				peek = melody[-1]
 
-			if peek[0:1] == "<":
-				result += ">"
+				if peek[0:1] == "<":
+					result += ">"
 
 			result += " " + nextNote
 			last = nextNote[-1:]
