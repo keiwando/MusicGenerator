@@ -220,6 +220,8 @@ def repeatListToSize(oldList,size):
 def getNextMelodyOrChord(melody):
 	#melody is a deque
 	result = ""
+	maxNotesInChord = 10
+	counter = 0
 	nextNote = melody.pop()
 	copy = nextNote
 	last = nextNote[-1:]
@@ -227,12 +229,14 @@ def getNextMelodyOrChord(melody):
 
 	if first == "<":
 		result += nextNote
-		while last != ">" and len(melody) > 0:
+		counter += 1
+		while last != ">" and len(melody) > 0 and counter < maxNotesInChord:
 			nextNote = melody.pop()
 			result += " " + nextNote
 			last = nextNote[-1:]
+			counter += 1
 
-			if len(melody) == 0 and last != ">":
+			if (len(melody) == 0 and last != ">") or counter == maxNotesInChord:
 				result += ">"
 			
 		return result
@@ -393,18 +397,19 @@ def writeSheet(title,rhyCompl,melCompl,exprCompl,rhythmTreble,rhythmBass,melodyT
 	expressionBass.reverse()
 
 	for i in range(0,150):
-		beat = rhythmTreble[i]
-		#determine if note or rest
-		det = beat[0:1]
-		if det == "x":
-			#note
-			musicUpper += getNextMelodyOrChord(melodyTreble)
-			musicUpper += beat[1:]
-		else:
-			musicUpper += beat
-		#expressions
-		musicUpper += expressionTreble.pop()
-		musicUpper += " "
+		if len(melody) > 0:
+			beat = rhythmTreble[i]
+			#determine if note or rest
+			det = beat[0:1]
+			if det == "x":
+				#note
+				musicUpper += getNextMelodyOrChord(melodyTreble)
+				musicUpper += beat[1:]
+			else:
+				musicUpper += beat
+			#expressions
+			musicUpper += expressionTreble.pop()
+			musicUpper += " "
 
 	for i in range(0,150):
 		beat = rhythmBass[i]
@@ -463,7 +468,7 @@ def testExpressionDecoder():
 		print decoder.next()
 
 def testNextMelOrChord():
-	testInput = deque(['a','c','d','f','as','g','a','eis','a','c','e'])
+	testInput = deque(['<a','c','d>','f','as','g','<a','eis','a','c','e','x','x','x','x','x','x','x','x','x','x'])
 	testInput.reverse()
 	while len(testInput) > 0:
 		print getNextMelodyOrChord(testInput)
