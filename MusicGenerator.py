@@ -242,6 +242,7 @@ def getNextMelodyOrChord(melody):
 
 				if peek[0:1] == "<":
 					result += ">"
+					last = ">"
 
 			if (len(melody) == 0 and last != ">") or counter == maxNotesInChord:
 				result += ">"
