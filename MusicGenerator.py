@@ -397,7 +397,7 @@ def writeSheet(title,rhyCompl,melCompl,exprCompl,rhythmTreble,rhythmBass,melodyT
 	expressionBass.reverse()
 
 	for i in range(0,150):
-		if len(melody) > 0:
+		if len(melodyTreble) > 0:
 			beat = rhythmTreble[i]
 			#determine if note or rest
 			det = beat[0:1]
@@ -412,18 +412,19 @@ def writeSheet(title,rhyCompl,melCompl,exprCompl,rhythmTreble,rhythmBass,melodyT
 			musicUpper += " "
 
 	for i in range(0,150):
-		beat = rhythmBass[i]
-		#determine if note or rest
-		det = beat[0:1]
-		if det == "x":
-			#note
-			musicLower += getNextMelodyOrChord(melodyBass)
-			musicLower += beat[1:]
-		else:
-			musicLower += beat
-		#expressions
-		musicLower += expressionBass.pop()
-		musicLower += " "
+		if len(melodyBass) > 0:
+			beat = rhythmBass[i]
+			#determine if note or rest
+			det = beat[0:1]
+			if det == "x":
+				#note
+				musicLower += getNextMelodyOrChord(melodyBass)
+				musicLower += beat[1:]
+			else:
+				musicLower += beat
+			#expressions
+			musicLower += expressionBass.pop()
+			musicLower += " "
 
 	#print musicUpper
 	#return "Upper: " + musicUpper + " Lower: " + musicLower
