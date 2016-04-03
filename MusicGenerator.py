@@ -217,6 +217,27 @@ def repeatListToSize(oldList,size):
 		newList.append(oldList[i%len(oldList)])
 	return newList
 
+def getNextMelodyOrChord(melody):
+	#melody is a deque
+	result = ""
+	nextNote = melody.pop()
+	copy = nextNote
+	last = nextNote[-1:]
+	first = nextNote[0:1]
+
+	if first == "<":
+		result += nextNote
+		while last != ">" and len(melody) > 0:
+			nextNote = melody.pop()
+			result += " " + nextNote
+			last = nextNote[-1:]
+
+			if len(melody) == 0 and last != ">":
+				result += ">"
+			
+		return result
+	else:
+		return nextNote
 
 def writeRandomLilyPondFile(rhythmCompl,melodyCompl,ExpressionCompl):
 	rhythmString = generateRandomRhythmString()
@@ -377,7 +398,7 @@ def writeSheet(title,rhyCompl,melCompl,exprCompl,rhythmTreble,rhythmBass,melodyT
 		det = beat[0:1]
 		if det == "x":
 			#note
-			musicUpper += melodyTreble.pop()
+			musicUpper += getNextMelodyOrChord(melodyTreble)
 			musicUpper += beat[1:]
 		else:
 			musicUpper += beat
@@ -391,7 +412,7 @@ def writeSheet(title,rhyCompl,melCompl,exprCompl,rhythmTreble,rhythmBass,melodyT
 		det = beat[0:1]
 		if det == "x":
 			#note
-			musicLower += melodyBass.pop()
+			musicLower += getNextMelodyOrChord(melodyBass)
 			musicLower += beat[1:]
 		else:
 			musicLower += beat
@@ -441,11 +462,16 @@ def testExpressionDecoder():
 	for i in range (0,400):
 		print decoder.next()
 
+def testNextMelOrChord():
+	testInput = deque(['a','c','d','f','as','g','a','eis','a','c','e'])
+	testInput.reverse()
+	while len(testInput) > 0:
+		print getNextMelodyOrChord(testInput)
+
 
 #testMelodyDecoder()
-writeRandomLilyPondFile(3,1,2)
-
-
+#writeRandomLilyPondFile(3,1,2)
+#testNextMelOrChord()
 
 
 
