@@ -237,10 +237,9 @@ def getNextMelodyOrChord(melody):
 				nextNote = melody.pop()
 				last = nextNote[-1:]
 
-				#len != 0 because of last >
-				'''if last == ">" and len(melody) != 0:
-					nextNote = nextNote[:-1]
-					print "cut"'''
+				if last == ">":
+					result += " " + nextNote
+					break
 
 				result += " " + nextNote
 				
@@ -492,6 +491,8 @@ def testExpressionDecoder():
 
 def testNextMelOrChord():
 	testInput = deque(['<a','c','d>','f','as','g','<a','eis','a','c','e','x','x>','x','x','x','x','x','<x','x','x>'])
+	testInput = deque(repeatListToSize(['<c','d','e>'],300))
+	print "TestINput: ", testInput
 	testInput.reverse()
 	while len(testInput) > 0:
 		print getNextMelodyOrChord(testInput)
@@ -499,7 +500,7 @@ def testNextMelOrChord():
 
 #testMelodyDecoder()
 #writeRandomLilyPondFile(3,1,2)
-testNextMelOrChord()
+#testNextMelOrChord()
 
 
 
