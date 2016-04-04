@@ -56,6 +56,8 @@ input[type="button"] {
 	font-size: 20px;
 	cursor: pointer;
 	margin: 5px;
+
+	-webkit-appearance: none;
 }
 
 input[type="radio"], 
