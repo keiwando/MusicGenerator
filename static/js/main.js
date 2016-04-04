@@ -287,21 +287,12 @@ $(document).ready(function(){
 
 	$('#expression-complexity').val(0);
 
-	/*if($('.random-rhythm-form').length > 0){
-		$('#rhythm-complexity').val(1);
-		$('#rhythm-compl-1').click(function(){
-			$('#rhythm-complexity').val(1);
-		});
-		$('#rhythm-compl-2').click(function(){
-			$('#rhythm-complexity').val(2);
-		});
-		$('#rhythm-compl-3').click(function(){
-			$('#rhythm-complexity').val(3);
-		});
-		$('#rhythm-compl-4').click(function(){
-			$('#rhythm-complexity').val(4);
+
+	if($('#mainSubmit').length > 0){
+		$('#mainSubmit').click(function(){
+			window.inChordTreble = false;
+			window.inChordBass = false;
 		});
 	}
-	*/
 
 });
