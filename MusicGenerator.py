@@ -222,38 +222,48 @@ def getNextMelodyOrChord(melody):
 	result = ""
 	maxNotesInChord = 10
 	counter = 0
-	nextNote = melody.pop()
-	peek = melody[-1]
-	last = nextNote[-1:]
-	first = nextNote[0:1]
+	if len(melody) > 0:
+		nextNote = melody.pop()
+		peek = melody[-1]
+		last = nextNote[-1:]
+		first = nextNote[0:1]
+		inChord = False
 
-	if first == "<":
-		result += nextNote
-		counter += 1
-		while last != ">" and len(melody) > 0 and counter < maxNotesInChord:
-			nextNote = melody.pop()
-			last = nextNote[-1:]
-
-			if last == ">":
-				nextNote = nextNote[:-1]
-
-			result += " " + nextNote
-			
+		if first == "<":
+			inChord = True
+			result += nextNote
 			counter += 1
+			while last != ">" and len(melody) > 0 and counter < maxNotesInChord:
+				nextNote = melody.pop()
+				last = nextNote[-1:]
 
-			if len(melody) > 0:
-				peek = melody[-1]
+				#len != 0 because of last >
+				'''if last == ">" and len(melody) != 0:
+					nextNote = nextNote[:-1]
+					print "cut"'''
 
-				if peek[0:1] == "<":
+				result += " " + nextNote
+				
+				counter += 1
+
+				if len(melody) > 0:
+					peek = melody[-1]
+
+					if peek[0:1] == "<":
+						result += ">"
+						last = ">"
+						
+
+				if last != ">" and (len(melody) == 0 or counter == maxNotesInChord):
 					result += ">"
-					last = ">"
-
-			if last != ">" and (len(melody) == 0 or counter == maxNotesInChord):
-				result += ">"
-			
-		return result
+					print "lastszt"
+					inChord = False
+				
+			return result
+		else:
+			return nextNote
 	else:
-		return nextNote
+		return ""
 
 def writeRandomLilyPondFile(rhythmCompl,melodyCompl,ExpressionCompl):
 	rhythmString = generateRandomRhythmString()
@@ -481,7 +491,7 @@ def testExpressionDecoder():
 		print decoder.next()
 
 def testNextMelOrChord():
-	testInput = deque(['<a','c','d>','f','as','g','<a','eis','a','c','e','x','x','x','x','x','x','x','x','x','x'])
+	testInput = deque(['<a','c','d>','f','as','g','<a','eis','a','c','e','x','x>','x','x','x','x','x','<x','x','x>'])
 	testInput.reverse()
 	while len(testInput) > 0:
 		print getNextMelodyOrChord(testInput)
@@ -489,7 +499,7 @@ def testNextMelOrChord():
 
 #testMelodyDecoder()
 #writeRandomLilyPondFile(3,1,2)
-#testNextMelOrChord()
+testNextMelOrChord()
 
 
 
