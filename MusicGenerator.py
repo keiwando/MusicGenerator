@@ -499,7 +499,7 @@ def testNextMelOrChord():
 		print getNextMelodyOrChord(testInput)
 
 
-testMelodyDecoder()
+#testMelodyDecoder()
 #writeRandomLilyPondFile(3,1,2)
 #testNextMelOrChord()
 
