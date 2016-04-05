@@ -174,6 +174,13 @@ $(document).ready(function(){
 				text += " ";
 				text += parts[i];
 			}
+			var last = parts[parts.length - 1];
+			//see if chord end
+			last = last.slice(-1);
+			if(last == ">"){
+				window.inChordTreble = true;
+			}
+
 			staff.val(text);
 			mainStaff.val(text);
 		});
@@ -191,6 +198,13 @@ $(document).ready(function(){
 				text += " ";
 				text += parts[i];
 			}
+			var last = parts[parts.length - 1];
+			//see if chord end
+			last = last.slice(-1);
+			if(last == ">"){
+				window.inChordBass = true;
+			}
+
 			staff.val(text);
 			mainStaff.val(text);
 		});
