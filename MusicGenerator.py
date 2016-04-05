@@ -129,6 +129,7 @@ class MelodyDecoder:
 			self.inChord = False
 		else:
 			result = self.nextNote(clef)
+			self.inChord = False
 
 		return result
 
@@ -478,7 +479,7 @@ def testRhythmDecoder():
 def testMelodyDecoder():
 	testString = generateRandomMelodyString()
 	melody = StringQueue(testString)
-	decoder = MelodyDecoder(melody,3)
+	decoder = MelodyDecoder(melody,2)
 	for i in range(0,400):
 		print decoder.next("treble")
 
@@ -498,7 +499,7 @@ def testNextMelOrChord():
 		print getNextMelodyOrChord(testInput)
 
 
-#testMelodyDecoder()
+testMelodyDecoder()
 #writeRandomLilyPondFile(3,1,2)
 #testNextMelOrChord()
 
