@@ -5,71 +5,65 @@ $(document).ready(function(){
 	window.inChordTreble = false;
 	window.inChordBass = false;
 
-	if($('#add-rhythm-treble').length > 0){
-		$('#add-rhythm-treble').click(function(){
-			var trebleStaff = $('#upper-rhythm');
-			var mainTrebleStaff = $('#hidden-rhythm-treble');
-			var upperText = trebleStaff.val();
-			var form = $('#rhythmInputByButton');
-			var length = form.find("input[type='radio'][name='length']:checked").val();
-			var noteOrRest = form.find("input[type='radio'][name='note-rest']:checked").val();
-			var dotted = form.find("input[type='checkbox'][name='dotted']").is(':checked');
-			if(dotted){
-				dotted = ".";
-			}else{
-				dotted = "";
-			}
-			var result = upperText + " " + noteOrRest + length + dotted;
-			trebleStaff.val(result);
-			mainTrebleStaff.val(result);
-		});
+	function addRhythm(staff){
+		staff = staff.toLowerCase();
+		var displayStaff;
+		var mainStaff;
+		if(staff == "treble"){
+			displayStaff = $('#upper-rhythm');
+			mainStaff = $('#hidden-rhythm-treble');
+		}else{
+			displayStaff = $('#lower-rhythm');
+			mainStaff = $('#hidden-rhythm-bass');
+		}
+		var text = displayStaff.val();
+		var form = $('#rhythmInputByButton');
+		var length = form.find("input[type='radio'][name='length']:checked").val();
+		var noteOrRest = form.find("input[type='radio'][name='note-rest']:checked").val();
+		var dotted = form.find("input[type='checkbox'][name='dotted']").is(':checked');
+		if(dotted){
+			dotted = ".";
+		}else{
+			dotted = "";
+		}
+		var result = text + " " + noteOrRest + length + dotted;
+		displayStaff.val(result);
+		mainStaff.val(result);
 	}
 
-	if($('#add-rhythm-bass').length > 0){
-		$('#add-rhythm-bass').click(function(){
-			var bassStaff = $('#lower-rhythm');
-			var mainBassStaff = $('#hidden-rhythm-bass');
-			var upperText = bassStaff.val();
-			var form = $('#rhythmInputByButton');
-			var length = form.find("input[type='radio'][name='length']:checked").val();
-			var noteOrRest = form.find("input[type='radio'][name='note-rest']:checked").val();
-			var dotted = form.find("input[type='checkbox'][name='dotted']").is(':checked');
-			if(dotted){
-				dotted = ".";
-			}else{
-				dotted = "";
+	function addMelody(staff){
+		staff = staff.toLowerCase();
+		var displayStaff;
+		var mainStaff;
+		if(staff == "treble"){
+			displayStaff = $('#upper-melody');
+			mainStaff = $('#hidden-melody-treble');
+		}else{
+			displayStaff = $('#lower-melody');
+			mainStaff = $('#hidden-melody-bass');
+		}
+
+		var text = displayStaff.val();
+		var form = $('#melodyInputByButton');
+		var octave = form.find("input[type='radio'][name='octave']:checked").val();
+		var tone = form.find("input[type='radio'][name='base-tone']:checked").val();
+		var accidental = form.find("input[type='radio'][name='accidental']:checked").val();
+		var chord = form.find("input[type='checkbox'][name='chord']").is(':checked');
+		var baseOctave = 2;
+		diff = parseInt(octave) - baseOctave;
+		octave = "";
+		if(diff > 0){
+			for(i = 0; i < diff; i++){
+				octave += "\'";
 			}
-			var result = upperText + " " + noteOrRest + length + dotted;
-			bassStaff.val(result);
-			mainBassStaff.val(result);
-		});
-	}
-
-
-	if($('#add-melody-treble').length > 0){
-		$('#add-melody-treble').click(function(){
-			var trebleStaff = $('#upper-melody');
-			var mainTrebleStaff = $('#hidden-melody-treble');
-			var upperText = trebleStaff.val();
-			var form = $('#melodyInputByButton');
-			var octave = form.find("input[type='radio'][name='octave']:checked").val();
-			var tone = form.find("input[type='radio'][name='base-tone']:checked").val();
-			var accidental = form.find("input[type='radio'][name='accidental']:checked").val();
-			var chord = form.find("input[type='checkbox'][name='chord']").is(':checked');
-			var baseOctave = 2;
-			diff = parseInt(octave) - baseOctave;
-			octave = "";
-			if(diff > 0){
-				for(i = 0; i < diff; i++){
-					octave += "\'";
-				}
-			}else if(diff < 0){
-				for(i = 0; i > diff; i--){
-					octave += ",";
-				}
+		}else if(diff < 0){
+			for(i = 0; i > diff; i--){
+				octave += ",";
 			}
+		}
 
-			//chord has to include space character!
+		//chord has to include space character!
+		if(staff == "treble"){
 			if(chord && !window.inChordTreble){
 				chord = " <";
 				window.inChordTreble = true;
@@ -79,37 +73,7 @@ $(document).ready(function(){
 			}else{
 				chord = " ";
 			}
-
-			var result = upperText + chord + tone + accidental + octave;
-			trebleStaff.val(result);
-			mainTrebleStaff.val(result);
-		});
-	}
-
-	if($('#add-melody-bass').length > 0){
-		$('#add-melody-bass').click(function(){
-			var trebleStaff = $('#lower-melody');
-			var mainTrebleStaff = $('#hidden-melody-bass');
-			var upperText = trebleStaff.val();
-			var form = $('#melodyInputByButton');
-			var octave = form.find("input[type='radio'][name='octave']:checked").val();
-			var tone = form.find("input[type='radio'][name='base-tone']:checked").val();
-			var accidental = form.find("input[type='radio'][name='accidental']:checked").val();
-			var chord = form.find("input[type='checkbox'][name='chord']").is(':checked');
-			var baseOctave = 2;
-			diff = parseInt(octave) - baseOctave;
-			octave = "";
-			if(diff > 0){
-				for(i = 0; i < diff; i++){
-					octave += "\'";
-				}
-			}else if(diff < 0){
-				for(i = 0; i > diff; i--){
-					octave += ",";
-				}
-			}
-
-			//chord has to include space character!
+		}else{
 			if(chord && !window.inChordBass){
 				chord = " <";
 				window.inChordBass = true;
@@ -119,96 +83,140 @@ $(document).ready(function(){
 			}else{
 				chord = " ";
 			}
+		}
 
-			var result = upperText + chord + tone + accidental + octave;
-			trebleStaff.val(result);
-			mainTrebleStaff.val(result);
+		var result = text + chord + tone + accidental + octave;
+		displayStaff.val(result);
+		mainStaff.val(result);
+
+	}
+
+	if($('#add-rhythm-treble').length > 0){
+		$('#add-rhythm-treble').click(function(){
+			addRhythm("treble");
 		});
 	}
 
-	//input remove buttons
+	if($('#add-rhythm-bass').length > 0){
+		$('#add-rhythm-bass').click(function(){
+			addRhythm("bass");
+		});
+	}
+
+
+	if($('#add-melody-treble').length > 0){
+		$('#add-melody-treble').click(function(){
+			addMelody("treble");
+		});
+	}
+
+	if($('#add-melody-bass').length > 0){
+		$('#add-melody-bass').click(function(){
+			addMelody("bass");
+		});
+	}
+
+	//input remove functions
+
+	function removeRhythm(staff){
+		staff = staff.toLowerCase();
+		var displayStaff;
+		var mainStaff;
+		if(staff == "treble"){
+			displayStaff = $('#upper-rhythm');
+			mainStaff = $('#hidden-rhythm-treble');
+		}else{
+			displayStaff = $('#lower-rhythm');
+			mainStaff = $('#hidden-rhythm-bass');
+		}
+		var text = displayStaff.val();
+
+		var parts = text.split(" ");
+		text = parts[0];
+		for(i = 1; i < parts.length - 1; i++){
+			text += " ";
+			text += parts[i];
+		}
+		displayStaff.val(text);
+		mainStaff.val(text);
+	}
+
+	function removeMelody(staff){
+		staff = staff.toLowerCase();
+		var displayStaff;
+		var mainStaff;
+		if(staff == "treble"){
+			displayStaff = $('#upper-melody');
+			mainStaff = $('#hidden-melody-treble');
+		}else{
+			displayStaff = $('#lower-melody');
+			mainStaff = $('#hidden-melody-bass');
+		}
+		var text = displayStaff.val();
+
+		var parts = text.split(" ");
+		text = parts[0];
+		for(i = 1; i < parts.length - 1; i++){
+			text += " ";
+			text += parts[i];
+		}
+		var last = parts[parts.length - 1];
+		//see if chord end
+		last = last.slice(-1);
+		if(last == ">"){
+			if(staff == "treble"){
+				window.inChordTreble = true;
+			}else{
+				window.inChordBass = true;
+			}	
+		}
+
+		displayStaff.val(text);
+		mainStaff.val(text);
+	}
 
 	if($('#rm-treble-rhythm').length > 0){
 		$('#rm-treble-rhythm').click(function(){
-			var staff = $('#upper-rhythm');
-			var mainStaff = $('#hidden-rhythm-treble');
-			var text = staff.val();
-
-			var parts = text.split(" ");
-			text = parts[0];
-			for(i = 1; i < parts.length - 1; i++){
-				text += " ";
-				text += parts[i];
-			}
-			staff.val(text);
-			mainStaff.val(text);
+			removeRhythm("treble");
 		});
 	}
 
 	if($('#rm-bass-rhythm').length > 0){
 		$('#rm-bass-rhythm').click(function(){
-			var staff = $('#lower-rhythm');
-			var mainStaff = $('#hidden-rhythm-bass');
-			var text = staff.val();
-
-			var parts = text.split(" ");
-			text = parts[0];
-			for(i = 1; i < parts.length - 1; i++){
-				text += " ";
-				text += parts[i];
-			}
-			staff.val(text);
-			mainStaff.val(text);
+			removeRhythm("bass");
 		});
 	}
 
 	if($('#rm-treble-melody').length > 0){
 		$('#rm-treble-melody').click(function(){
-			var staff = $('#upper-melody');
-			var mainStaff = $('#hidden-melody-treble');
-			var text = staff.val();
-
-			var parts = text.split(" ");
-			text = parts[0];
-			for(i = 1; i < parts.length - 1; i++){
-				text += " ";
-				text += parts[i];
-			}
-			var last = parts[parts.length - 1];
-			//see if chord end
-			last = last.slice(-1);
-			if(last == ">"){
-				window.inChordTreble = true;
-			}
-
-			staff.val(text);
-			mainStaff.val(text);
+			removeMelody("treble");
 		});
 	}
 
 	if($('#rm-bass-melody').length > 0){
 		$('#rm-bass-melody').click(function(){
-			var staff = $('#lower-melody');
-			var mainStaff = $('#hidden-melody-bass');
-			var text = staff.val();
-
-			var parts = text.split(" ");
-			text = parts[0];
-			for(i = 1; i < parts.length - 1; i++){
-				text += " ";
-				text += parts[i];
-			}
-			var last = parts[parts.length - 1];
-			//see if chord end
-			last = last.slice(-1);
-			if(last == ">"){
-				window.inChordBass = true;
-			}
-
-			staff.val(text);
-			mainStaff.val(text);
+			removeMelody("asd");
 		});
 	}
+	//key input 
+	//W = rhythm treble | E = rhythm bass | S = melody treble | D = melody bass
+	//Q/R = remove rhythm treble/bass | A/F = remove melody treble/bass
+	$(function() {
+	   $(window).keypress(function(e) {
+	       var key = String.fromCharCode(e.keyCode);
+	       key = key.toLowerCase();
+	       switch(key){
+	       	case 'w': addRhythm("treble"); break;
+	       	case 'e': addRhythm("bass"); break;
+	       	case 's': addMelody("treble"); break;
+	       	case 'd': addMelody("bass"); break;
+	       	case 'q': removeRhythm("treble"); break;
+	       	case 'r': removeRhythm("bass"); break;
+	       	case 'a': removeMelody("treble"); break;
+	       	case 'f': removeMelody("bass"); break;
+	       }
+	   });
+	}); 
 
 	//switches
 

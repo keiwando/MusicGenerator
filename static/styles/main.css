@@ -155,7 +155,7 @@ textarea {
 
 	border: 2px solid black;
 	resize: none;
-	pointer-events: none;
+	overflow-y: scroll;
 
 	font-size: 15px;
 
