@@ -67,6 +67,7 @@ Art/Orn/Dyn 		400							=> 2400 Bit
 Complexity levels: 
 rhythm: 1 2 3 4
 melody: 1 2 3 4 5 6
+expressions: 1 2 3
 
 general:
 \set Staff.extraNatural = ##f

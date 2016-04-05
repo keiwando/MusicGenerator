@@ -212,6 +212,41 @@
             </form>
           </div> <!-- end MELODY setting-->
 
+
+
+          <div class="melodySetting setting">
+            <h2>EXPRESSION</h2>
+            
+            <div class="lock" id="rhythm-lock">
+              <img class="unlocked-img" src="{{url_for('static',filename="images/lock-unlocked.png")}}">
+              <img class="locked-img hidden" src="{{url_for('static',filename="images/lock-locked.png")}}">
+            </div>
+            <!--
+            <div class="switch" id="expression-switch">
+                <input type="radio" name="expression-choice-switch" id="expression-choice-input" value="choice" checked>
+                  <label for="expression-choice-input">OFF    <span></span></label>
+                </input>
+
+                <input type="radio" name="expression-choice-switch" id="expression-choice-random" value="random">
+                  <label for="expression-choice-random"><span></span>   RANDOM</label>
+                </input> 
+            </div>
+            -->
+
+            <form class="random-form random-expression-form" id="expression-random-form" action="." method="POST">
+              <label>COMPLEXITY</label>
+              <input type="radio" name="expression-compl" id="expression-compl-0" value="0" checked>
+                <label for="expression-compl-0" ><span></span>OFF</label></input>
+              <input type="radio" name="expression-compl" id="expression-compl-1" value="1" checked>
+                <label for="expression-compl-1" ><span></span>1</label></input>
+              <input type="radio" name="expression-compl" id="expression-compl-2" value="2">
+                <label for="expression-compl-2" ><span></span>2</label></input>
+              <input type="radio" name="expression-compl" id="expression-compl-3" value="3" >
+                <label for="expression-compl-3" ><span></span>3</label></input>
+
+            </form>
+          </div> <!-- end EXPRESSION setting-->
+
         </div>
 
         

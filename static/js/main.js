@@ -307,6 +307,14 @@ $(document).ready(function(){
 		});
 	}
 
+	if($('.random-expression-form').length > 0){
+		$('#expression-complexity').val(0);	//initialize
+		$('input[name="expression-compl"]').click(function(){
+			var value = $('input[name="expression-compl"]:checked', '#expression-random-form').val();
+			$('#expression-complexity').val(value);
+		});
+	}
+
 	$('#expression-complexity').val(0);
 
 
