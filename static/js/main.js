@@ -207,13 +207,28 @@ $(document).ready(function(){
 	       key = key.toLowerCase();
 	       switch(key){
 	       	case 'w': addRhythm("treble"); break;
-	       	case 'e': addRhythm("bass"); break;
-	       	case 's': addMelody("treble"); break;
-	       	case 'd': addMelody("bass"); break;
-	       	case 'q': removeRhythm("treble"); break;
-	       	case 'r': removeRhythm("bass"); break;
-	       	case 'a': removeMelody("treble"); break;
-	       	case 'f': removeMelody("bass"); break;
+	       	case 's': addRhythm("bass"); break;
+	       	case 'i': addMelody("treble"); break;
+	       	case 'k': addMelody("bass"); break;
+	       	case 'r': removeRhythm("treble"); break;
+	       	case 'f': removeRhythm("bass"); break;
+	       	case 'z': case 'y': removeMelody("treble"); break;
+	       	case 'h': removeMelody("bass"); break;
+
+	       	//rhythm
+	       	case 'q': case 'e': changeNoteRest(); break;
+	       	case 'a': previousLength(); break;
+	       	case 'd': nextLength(); break;
+	       	case '.': checkUncheckCheckbox($('#dotted')); break;
+
+	       	//melody
+	       	case 'j': previousOctave(); break;
+	       	case 'l': nextOctave(); break;
+	       	case 'u': previousTone(); break;
+	       	case 'o': nextTone(); break;
+	       	case ',': checkUncheckCheckbox($('#chord')); break;
+	       	case '7': previousAccidental(); break;
+	       	case '9': nextAccidental(); break;
 	       }
 	   });
 	}); 
@@ -325,4 +340,99 @@ $(document).ready(function(){
 		});
 	}
 
+	//setup radio button lists
+
+	function checkNextRadioButton(parentObject){
+		var checkedButton = parentObject.find('input:checked');
+		var nextButton = checkedButton.next().next();
+		if(nextButton.length == 0){
+			//next doesn't exist -> loop to first
+			nextButton = parentObject.children().first();
+		}
+		checkedButton.prop('checked',false);
+		nextButton.prop("checked",true);	
+		
+	}
+
+	function checkPreviousRadioButton(parentObject){
+		var checkedButton = parentObject.find('input:checked');
+		var nextButton = checkedButton.prev().prev();
+		if(nextButton.length == 0){
+			//next doesn't exist -> loop to first
+			nextButton = parentObject.children().last().prev();
+		}
+		checkedButton.prop('checked',false);
+		nextButton.prop("checked",true);	
+		
+	}
+
+	function checkUncheckCheckbox(box){
+		if(box.is(":checked")){
+			box.prop("checked",false);
+		}else{
+			box.prop("checked",true);
+		}
+	}
+
+	//these functions are just for the sake of readability
+
+	function nextLengthAndOctave(){
+		checkNextRadioButton($('#lengthChoice'));
+		checkNextRadioButton($('#octaveChoice'));
+	}
+
+	function previousLengthAndOctave(){
+		checkPreviousRadioButton($('#lengthChoice'));
+		checkPreviousRadioButton($('#octaveChoice'));
+	}
+
+	function nextLength(){
+		checkNextRadioButton($('#lengthChoice'));
+	}
+
+	function previousLength(){
+		checkPreviousRadioButton($('#lengthChoice'));
+	}
+
+	function nextOctave(){
+		checkNextRadioButton($('#octaveChoice'));
+	}
+
+	function previousOctave(){
+		checkPreviousRadioButton($('#octaveChoice'));
+	}
+
+	function previousTone(){
+		checkPreviousRadioButton($('#tone-Choice'));
+	}
+
+	function nextTone(){
+		checkNextRadioButton($('#tone-Choice'));
+	}
+
+	function previousAccidental(){
+		checkPreviousRadioButton($('#accidental-Choice'));
+	}
+
+	function nextAccidental(){
+		checkNextRadioButton($('#accidental-Choice'));
+	}
+
+	function changeNoteRest(){
+		checkNextRadioButton($('#note-rest-choice'));
+	}
+
+
 });
+
+
+
+
+
+
+
+
+
+
+
+

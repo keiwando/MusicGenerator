@@ -57,10 +57,14 @@
 
             <div class="noteInput-rhythm input">
               <form id="rhythmInputByButton" action="." method="POST">
-                <input type="radio" name="note-rest" id="note-rest-x" value="x" checked>
-                  <label for="note-rest-x" ><span></span>NOTE</label></input>
-                <input type="radio" name="note-rest" id="note-rest-r" value="r">
-                  <label for="note-rest-r" ><span></span>REST</label></input>
+
+                <div id="note-rest-choice">
+                  <input type="radio" name="note-rest" id="note-rest-x" value="x" checked>
+                    <label for="note-rest-x" ><span></span>NOTE</label></input>
+                  <input type="radio" name="note-rest" id="note-rest-r" value="r">
+                    <label for="note-rest-r" ><span></span>REST</label></input>
+                </div>
+                
                 <div id="lengthChoice">
                   <input type="radio" name="length" id="length1" value="1">
                     <label for="length1">LENGTH<br><span></span>1</label></input>
@@ -79,9 +83,11 @@
                   <input type="radio" name="length" id="length128" value="128">
                     <label for="length128"><span></span>128</label></input>
                 </div>
+
                 <input type="checkbox" name="dotted" id="dotted" value=".">
                   <label for="dotted"><span></span>DOTTED</label>
                 </input>
+                
                 <br>
                 <input type="button" id="rm-treble-rhythm" name="rm-treble-rhythm" value="<-"></input>
                 <input type="button" id="add-rhythm-treble" name="add-rhythm-treble" value="ADD Tr."></input>
@@ -130,6 +136,7 @@
 
             <div class="noteInput-melody input">
               <form id="melodyInputByButton" action="." method="POST">
+              <div id="accidental-Choice">
                 <input type="radio" name="accidental" id="acc-double-flat" value="eses">
                   <label for="acc-double-flat" ><span></span>bb</label></input>
                 <input type="radio" name="accidental" id="acc-flat" value="es">
@@ -140,23 +147,28 @@
                   <label for="acc-sharp" ><span></span>#</label></input>
                 <input type="radio" name="accidental" id="acc-double-sharp" value="isis">
                   <label for="acc-double-sharp" ><span></span>##</label></input>
+              </div>
+                
                 
 
                 <br>
-                <input type="radio" name="base-tone" id="base-tone-c" value="c" checked>
-                  <label for="base-tone-c"><span></span>C</label></input>
-                <input type="radio" name="base-tone" id="base-tone-d" value="d">
-                  <label for="base-tone-d"><span></span>D</label></input>
-                <input type="radio" name="base-tone" id="base-tone-e" value="e">
-                  <label for="base-tone-e"><span></span>E</label></input>
-                <input type="radio" name="base-tone" id="base-tone-f" value="f">
-                  <label for="base-tone-f"><span></span>F</label></input>
-                <input type="radio" name="base-tone" id="base-tone-g" value="g">
-                  <label for="base-tone-g"><span></span>G</label></input>
-                <input type="radio" name="base-tone" id="base-tone-a" value="a">
-                  <label for="base-tone-a"><span></span>A</label></input>
-                <input type="radio" name="base-tone" id="base-tone-b" value="b">
-                  <label for="base-tone-b"><span></span>B</label></input>
+                <div id="tone-Choice">
+                  <input type="radio" name="base-tone" id="base-tone-c" value="c" checked>
+                    <label for="base-tone-c"><span></span>C</label></input>
+                  <input type="radio" name="base-tone" id="base-tone-d" value="d">
+                    <label for="base-tone-d"><span></span>D</label></input>
+                  <input type="radio" name="base-tone" id="base-tone-e" value="e">
+                    <label for="base-tone-e"><span></span>E</label></input>
+                  <input type="radio" name="base-tone" id="base-tone-f" value="f">
+                    <label for="base-tone-f"><span></span>F</label></input>
+                  <input type="radio" name="base-tone" id="base-tone-g" value="g">
+                    <label for="base-tone-g"><span></span>G</label></input>
+                  <input type="radio" name="base-tone" id="base-tone-a" value="a">
+                    <label for="base-tone-a"><span></span>A</label></input>
+                  <input type="radio" name="base-tone" id="base-tone-b" value="b">
+                    <label for="base-tone-b"><span></span>B</label></input>  
+                </div>
+                
 
                 <div id="octaveChoice">
                   <input type="radio" name="octave" id="octave0" value="0">
