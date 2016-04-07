@@ -468,8 +468,8 @@ def writeSheet(title,rhyCompl,melCompl,exprCompl,rhythmTreble,rhythmBass,melodyT
 	#print musicUpper
 	#return "Upper: " + musicUpper + " Lower: " + musicLower
 	#write lilypond file
-    keyInfo = [keyAcc,keyTone,keyMajMin]
-    print "keyInfo ", str(keyInfo))
+	keyInfo = [keyAcc,keyTone,keyMajMin]
+	print "keyInfo ", str(keyInfo)
 	writeLilyPondFile(musicUpper,musicLower,"Sheet",title,keyInfo)
 
 
