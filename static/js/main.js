@@ -356,8 +356,10 @@ $(document).ready(function(){
 			var value = label.text();
 			if(value == 'MAJOR'){
 				label.html("<span></span>MINOR");
+				$('#major-minor').val("MINOR");
 			}else{
 				label.html("<span></span>MAJOR");
+				$('#major-minor').val("MAJOR");
 			}
 		});
 	}
