@@ -33,7 +33,7 @@ class RhythmDecoder:
 		nor = beat[:1]
 		length = beat[1:4]
 		dot = beat[-1:]
-		
+
 		result = ""
 		if nor == "1":
 			result += "x"
@@ -55,7 +55,7 @@ class RhythmDecoder:
 
 		return result
 
-	
+
 
 class MelodyDecoder:
 	def __init__(self,melody,complexity):
@@ -73,7 +73,7 @@ class MelodyDecoder:
 		note = notes[noteIndex]
 		accIntex = int(self.melody.next(3))
 		comp = self.complexity
-		
+
 		if comp == 1:
 			accIntex = 0
 		elif comp >= 2 and comp < 5:
@@ -83,7 +83,7 @@ class MelodyDecoder:
 
 		note += accidentals[accIntex]
 
-		octave = int(self.melody.next(3),2) 
+		octave = int(self.melody.next(3),2)
 		if comp == 1:
 			octave = octave % 4
 		elif comp <= 3:
@@ -134,7 +134,7 @@ class MelodyDecoder:
 		return result
 
 
-	
+
 
 class ExpressionDecoder:
 	def __init__(self,Expression,complexity):
@@ -154,7 +154,7 @@ class ExpressionDecoder:
 			return self.Expressionulation[index]
 
 	def next(self):
-		
+
 		dec = int(self.Expression.next(2),2)
 		comp = self.complexity
 		if comp == 1:
@@ -257,7 +257,7 @@ def getNextMelodyOrChord(melody):
 					break
 
 				result += " " + nextNote
-				
+
 				counter += 1
 
 				if len(melody) > 0:
@@ -266,13 +266,13 @@ def getNextMelodyOrChord(melody):
 					if peek[0:1] == "<":
 						result += ">"
 						last = ">"
-						
+
 
 				if last != ">" and (len(melody) == 0 or counter == maxNotesInChord):
 					result += ">"
 					print "lastszt"
 					inChord = False
-				
+
 			return result
 		else:
 			return nextNote
@@ -353,14 +353,14 @@ def writeSheet(title,rhyCompl,melCompl,exprCompl,rhythmTreble,rhythmBass,melodyT
 
 		rhythmTreble = repeatListToSize(rhythmTreble,150)
 		rhythmBass = repeatListToSize(rhythmBass,150)
-	else: 
+	else:
 		rhythmTreble = generateRandomRhythmString()
 		rhythmTreble = StringQueue(rhythmTreble)
 		decoder = RhythmDecoder(rhythmTreble,int(rhyCompl))
 		rhythmTreble = []
 		for i in range(0,150):
 			rhythmTreble.append(decoder.next())
-		
+
 		rhythmBass = generateRandomRhythmString()
 		rhythmBass = StringQueue(rhythmBass)
 		decoder = RhythmDecoder(rhythmBass,int(rhyCompl))
@@ -420,7 +420,7 @@ def writeSheet(title,rhyCompl,melCompl,exprCompl,rhythmTreble,rhythmBass,melodyT
 		decoder = ExpressionDecoder(expressionBass,int(exprCompl))
 		expressionBass = []
 		for i in range(0,300):
-			expressionBass.append(decoder.next())	
+			expressionBass.append(decoder.next())
 
 
 	#create upper and lower staff
@@ -468,8 +468,8 @@ def writeSheet(title,rhyCompl,melCompl,exprCompl,rhythmTreble,rhythmBass,melodyT
 	#print musicUpper
 	#return "Upper: " + musicUpper + " Lower: " + musicLower
 	#write lilypond file
-	keyInfo = [keyAcc,keyTone,keyMajMin]
-	print "keyInfo ", str(keyInfo))
+    keyInfo = [keyAcc,keyTone,keyMajMin]
+    print "keyInfo ", str(keyInfo))
 	writeLilyPondFile(musicUpper,musicLower,"Sheet",title,keyInfo)
 
 
