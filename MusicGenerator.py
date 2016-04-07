@@ -327,6 +327,7 @@ def writeLilyPondFile(upper,lower,filename,title,keyInfo):
 	file = open(os.path.join(FILEPATH,filename + ".ly"),"w")
 
 	key = createKey(keyInfo)
+	print key
 
 	text = generateLilyPondHeader(title)
 	text += generateLilyPondUpper(upper,key)
@@ -468,7 +469,7 @@ def writeSheet(title,rhyCompl,melCompl,exprCompl,rhythmTreble,rhythmBass,melodyT
 	#return "Upper: " + musicUpper + " Lower: " + musicLower
 	#write lilypond file
 	keyInfo = [keyAcc,keyTone,keyMajMin]
-	print("keyInfo " + str(keyInfo))
+	print "keyInfo ", str(keyInfo))
 	writeLilyPondFile(musicUpper,musicLower,"Sheet",title,keyInfo)
 
 
