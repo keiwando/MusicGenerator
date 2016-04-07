@@ -150,8 +150,6 @@
               </div>
                 
                 
-
-                <br>
                 <div id="tone-Choice">
                   <input type="radio" name="base-tone" id="base-tone-c" value="c" checked>
                     <label for="base-tone-c"><span></span>C</label></input>
@@ -261,9 +259,41 @@
 
         </div>
 
-        
-
         <form id="mainForm" action="." method="POST">
+          <h2>KEY</h2>
+
+          <div id="key-accidental-Choice">
+            <input type="radio" name="key-accidental" id="key-acc-flat" value="es">
+              <label for="key-acc-flat" ><span></span>FLAT</label></input>
+            <input type="radio" name="key-accidental" id="key-acc-natural" value="" checked>
+              <label for="key-acc-natural" ><span></span>NATURAL</label></input>
+            <input type="radio" name="key-accidental" id="key-acc-sharp" value="is">
+              <label for="key-acc-sharp" ><span></span>SHARP</label></input>
+          </div>
+            
+          <div id="key-Choice">
+            <input type="radio" name="base-key" id="base-key-c" value="c" checked>
+              <label for="base-key-c"><span></span>C</label></input>
+            <input type="radio" name="base-key" id="base-key-d" value="d">
+              <label for="base-key-d"><span></span>D</label></input>
+            <input type="radio" name="base-key" id="base-key-e" value="e">
+              <label for="base-key-e"><span></span>E</label></input>
+            <input type="radio" name="base-key" id="base-key-f" value="f">
+              <label for="base-key-f"><span></span>F</label></input>
+            <input type="radio" name="base-key" id="base-key-g" value="g">
+              <label for="base-key-g"><span></span>G</label></input>
+            <input type="radio" name="base-key" id="base-key-a" value="a">
+              <label for="base-key-a"><span></span>A</label></input>
+            <input type="radio" name="base-key" id="base-key-b" value="b">
+              <label for="base-key-b"><span></span>B</label></input>  
+          </div>
+
+          <input type="checkbox" name="major-minor" id="major-minor" value=".">
+            <label id="major-minor-label" for="major-minor"><span></span>MAJOR</label>
+          </input>
+
+          <br><br><br>
+
           <textarea id="title" name="title" placeholder="Title"></textarea>
           <br>
           <input class="button randomButton" id="mainSubmit" type="submit" name="randomFile" value="GENERATE"></input>

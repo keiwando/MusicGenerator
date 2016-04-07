@@ -350,6 +350,18 @@ $(document).ready(function(){
 		});
 	}
 
+	if($('#major-minor').length > 0){
+		$('#major-minor').click(function(){
+			var label = $('#major-minor-label');
+			var value = label.text();
+			if(value == 'MAJOR'){
+				label.html("<span></span>MINOR");
+			}else{
+				label.html("<span></span>MAJOR");
+			}
+		});
+	}
+
 	//setup radio button lists
 
 	function checkNextRadioButton(parentObject){

@@ -174,15 +174,15 @@ class ExpressionDecoder:
 def generateLilyPondHeader(title):
 	return "\\header{ title = \"" + title + "\"} \n\n"
 
-def generateLilyPondUpper(notes):
+def generateLilyPondUpper(notes,key):
 	return "upper = \\new Voice \\with {" + "\n \\remove \"Note_heads_engraver\"" + \
 			"\n \\consists \"Completion_heads_engraver\"\n}" + "\n{" + \
-			"\n \t\\clef treble\n\t" + notes + "\n}\n\n"	#not  \\relative c\'
+			"\n \t\\clef treble\n" + key + "\n\t" + notes + "\n}\n\n"	#not  \\relative c\'
 
-def generateLilyPondLower(notes):
+def generateLilyPondLower(notes,key):
 	return "lower = \\new Voice \\with {" + "\n \\remove \"Note_heads_engraver\"" + \
 			"\n \\consists \"Completion_heads_engraver\"\n}" + "\n{" + \
-			"\n \t\\clef bass\n\t" + notes + "\n}\n\n"	#not  \\relative c
+			"\n \t\\clef bass\n" + key + "\n\t" + notes + "\n}\n\n"	#not  \\relative c
 
 def generateLilyPondPianoScore():
 	return "\\score {\n" + " \\new PianoStaff <<\n" + "  %\\set PianoStaff.instrumentName = #\"Piano  \"\n" + \
@@ -217,6 +217,20 @@ def repeatListToSize(oldList,size):
 	for i in range(0,size):
 		newList.append(oldList[i%len(oldList)])
 	return newList
+
+def createKey(keyInfo):
+	accidental = keyInfo[0]
+	tone = keyInfo[1]
+	majmin = keyInfo[2]
+	result = "\\key " + tone
+	if accidental == 'FLAT':
+		result += 'es'
+	elif accidental == 'SHARP':
+		result += 'is'
+
+	result += " \\" + majmin.lower()
+	return result
+
 
 def getNextMelodyOrChord(melody):
 	#melody is a deque
@@ -309,12 +323,14 @@ def writeRandomLilyPondFile(rhythmCompl,melodyCompl,ExpressionCompl):
 	writeLilyPondFile(musicUpper,musicLower,"Sheet","Random")
 
 
-def writeLilyPondFile(upper,lower,filename,title):
+def writeLilyPondFile(upper,lower,filename,title,keyInfo):
 	file = open(os.path.join(FILEPATH,filename + ".ly"),"w")
 
+	key = createKey(keyInfo)
+
 	text = generateLilyPondHeader(title)
-	text += generateLilyPondUpper(upper)
-	text += generateLilyPondLower(lower)
+	text += generateLilyPondUpper(upper,key)
+	text += generateLilyPondLower(lower,key)
 	text += generateLilyPondPianoScore()
 	text += generateLilyPondVersionNumber()
 
@@ -322,7 +338,7 @@ def writeLilyPondFile(upper,lower,filename,title):
 
 	file.close()
 
-def writeSheet(title,rhyCompl,melCompl,exprCompl,rhythmTreble,rhythmBass,melodyTreble,melodyBass,expressionTreble,expressionBass):
+def writeSheet(title,rhyCompl,melCompl,exprCompl,rhythmTreble,rhythmBass,melodyTreble,melodyBass,expressionTreble,expressionBass,keyAcc,keyTone,keyMajMin):
 	#rhythm
 	if rhyCompl == "0":
 		#rhythm from input
@@ -451,7 +467,8 @@ def writeSheet(title,rhyCompl,melCompl,exprCompl,rhythmTreble,rhythmBass,melodyT
 	#print musicUpper
 	#return "Upper: " + musicUpper + " Lower: " + musicLower
 	#write lilypond file
-	writeLilyPondFile(musicUpper,musicLower,"Sheet",title)
+	keyInfo = [keyAcc,keyTone,keyMajMin]
+	writeLilyPondFile(musicUpper,musicLower,"Sheet",title,keyInfo)
 
 
 def writeTestFile():
@@ -502,7 +519,6 @@ def testNextMelOrChord():
 #testMelodyDecoder()
 #writeRandomLilyPondFile(3,1,2)
 #testNextMelOrChord()
-
 
 
 

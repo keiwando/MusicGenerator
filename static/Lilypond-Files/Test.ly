@@ -6,6 +6,7 @@
   } 
   \relative c'{
    	\clef treble 
+    \key c \minor
    	<c e g>2 bes1 g4 a b c 
   } 
 
@@ -13,7 +14,7 @@
     \remove "Note_heads_engraver"
     \consists "Completion_heads_engraver"
   } 
-  \relative c{ \clef bass <d f a> gis16 g f d f1 } 
+  \relative c{ \key c \minor \clef bass <d f a> gis16 g f d f1 } 
 
  \score {
   \new PianoStaff <<

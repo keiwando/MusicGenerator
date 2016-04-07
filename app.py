@@ -67,7 +67,11 @@ def home():
             melodyBass = request.form['hidden-melody-bass']
             expTreble = request.form['hidden-expression-treble']
             expBass = request.form['hidden-expression-bass']
-            MG.writeSheet(title,rhyCompl,melCompl,expCompl,rhythmTreble,rhythmBass,melodyTreble,melodyBass,expTreble,expBass)
+
+            keyAcc = request.form['key-accidental']
+            keyTone = request.form['base-key']
+            keyMinMaj = request.form['major-minor']
+            MG.writeSheet(title,rhyCompl,melCompl,expCompl,rhythmTreble,rhythmBass,melodyTreble,melodyBass,expTreble,expBass,keyAcc,keyTone,keyMinMaj)
             compileFile.compile()
             return serve_static("Sheet.pdf")
         else:
