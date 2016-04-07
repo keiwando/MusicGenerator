@@ -463,7 +463,7 @@ def writeSheet(title,rhyCompl,melCompl,exprCompl,rhythmTreble,rhythmBass,melodyT
 	else:
 		melodyTreble = generateRandomMelodyString()
 		melodyTreble = StringQueue(melodyTreble)
-		decoder = MelodyDecoder(melodyTreble,int(melCompl))
+		decoder = MelodyDecoder(melodyTreble,int(melCompl),key=createKeyForDecoding(keyInfo))
 		melodyTreble = []
 		for i in range(0,300):
 			melodyTreble.append(decoder.next("treble"))
