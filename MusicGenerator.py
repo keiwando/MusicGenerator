@@ -130,7 +130,7 @@ class MelodyDecoder:
 	def nextNote(self,clef):
 		notes = ['c','d','e','f','g','a','b','c']
 		accidentals = ['','is','es','isis','eses']
-		octavesTreble = ['\'','\'',"\'","\'\'","\'\'","","\'\'\'","\'\'\'\'"]	#(0,0,+1,+1,+2,-1,+3,+4)
+		octavesTreble = ['\'','\'',"\'\'","\'\'","\'\'\'","","\'\'\'","\'\'\'\'"]	#(0,0,+1,+1,+2,-1,+3,+4)
 		octavesBass = ['','','',",",",",'',",,","\'"]	#(0,0,0,-1,-1,0,-2,+1)
 		noteIndex = int(self.melody.next(3),2)
 		note = notes[noteIndex]
@@ -144,7 +144,7 @@ class MelodyDecoder:
 		else:
 			accIntex = accIntex % 5
 
-		if comp <= 3:
+		if comp < 3:
 			note = getNoteInKey(note,self.key)
 		else:
 			note += accidentals[accIntex]
