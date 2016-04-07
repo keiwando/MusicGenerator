@@ -144,7 +144,7 @@ class MelodyDecoder:
 		else:
 			accIntex = accIntex % 5
 
-		if comp == 1:
+		if comp <= 3:
 			note = getNoteInKey(note,self.key)
 		else:
 			note += accidentals[accIntex]
