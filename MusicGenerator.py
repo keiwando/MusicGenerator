@@ -9,6 +9,68 @@ from collections import deque
 FILEPATH = os.path.dirname(__file__)
 FILEPATH = os.path.join(FILEPATH,"static","Lilypond-Files")
 
+def getNoteInKey(note,key):
+	# C = 0 | D = 1 | E = 2 | F = 3 | G = 4 | A = 5 | B = 6 
+	result = ""
+	tones = "cdefgab"
+	index = tones.index(note)
+	key = key.lower()
+	#key accidentals
+	amin = cmaj = ['','','','','','','']
+	emin = gmaj = ['','','','is','','','']
+	bmin = dmaj = ['is','','','is','','','']
+	fsharpmin = amaj = ['is','','','is','is','','']
+	csharpmin = emaj = ['is','is','','is','is','','']
+	gsharpmin = bmaj = ['is','is','','is','is','is','']
+	dsharpmin = fsharpmaj = ['is','is','is','is','is','is','']
+	asharpmin = csharpmaj = ['is','is','is','is','is','is','is']
+
+	dmin = fmaj = ['','','','','','','es']
+	gmin = bflatmaj = ['','','es','','','','es']
+	cmin = eflatmaj = ['','','es','','','es','es']
+	fmin = aflatmaj = ['','es','es','','','es','es']
+	bflatmin = dflatmaj = ['','es','es','','es','es','es']
+	eflatmin = gflatmaj = ['es','es','es','','es','es','es']
+	aflatmin = cflatmaj = ['es','es','es','es','es','es','es']
+
+	if(key == 'aminor' or key == 'cmajor'):
+		result = note + cmaj[index]
+	elif(key == 'eminor' or key == 'gmajor'):
+		result = note + gmaj[index]
+	elif(key == 'bminor' or key == 'dmajor'):
+		result = note + dmaj[index]
+	elif(key == 'fsharpminor' or key == 'amajor'):
+		result = note + amaj[index]
+	elif(key == 'csharpminor' or key == 'emajor'):
+		result = note + emaj[index]
+	elif(key == 'dsharpminor' or key == 'fsharpmajor'):
+		result = note + fsharpmaj[index]
+	elif(key == 'asharpminor' or key == 'csharpmajor'):
+		result = note + csharpmaj[index]
+	elif(key == 'dminor' or key == 'fmajor'):
+		result = note + fmaj[index]
+	elif(key == 'gminor' or key == 'bflatmajor'):
+		result = note + bflatmaj[index]
+	elif(key == 'cminor' or key == 'eflatmajor'):
+		result = note + eflatmaj[index]
+	elif(key == 'fminor' or key == 'aflatmajor'):
+		result = note + aflatmaj[index]
+	elif(key == 'bflatminor' or key == 'dflatmajor'):
+		result = note + dflatmaj[index]
+	elif(key == 'eflatminor' or key == 'gflatmajor'):
+		result = note + gflatmaj[index]
+	elif(key == 'aflatminor' or key == 'cflatmajor'):
+		result = note + cflatmaj[index]
+	else:
+		#theoretical scale key
+		#default cmaj
+		result = note
+
+
+	return result
+
+	
+
 class StringQueue:
 
 	def __init__(self,str):
@@ -58,11 +120,12 @@ class RhythmDecoder:
 
 
 class MelodyDecoder:
-	def __init__(self,melody,complexity):
+	def __init__(self,melody,complexity,key="cmajor"):
 		self.melody = melody
 		self.complexity = complexity
 		self.inChord = False
 		self.NiC = 0	#notes in chord
+		self.key = key
 
 	def nextNote(self,clef):
 		notes = ['c','d','e','f','g','a','b','c']
@@ -81,7 +144,10 @@ class MelodyDecoder:
 		else:
 			accIntex = accIntex % 5
 
-		note += accidentals[accIntex]
+		if comp == 1:
+			note = getNoteInKey(note,self.key)
+		else:
+			note += accidentals[accIntex]
 
 		octave = int(self.melody.next(3),2)
 		if comp == 1:
@@ -231,6 +297,18 @@ def createKey(keyInfo):
 	result += " \\" + majmin.lower()
 	return result
 
+def createKeyForDecoding(keyInfo):
+	accidental = keyInfo[0]
+	tone = keyInfo[1]
+	majmin = keyInfo[2]
+	result = tone
+	if accidental == 'FLAT':
+		result += 'es'
+	elif accidental == 'SHARP':
+		result += 'is'
+	result += majmin
+	result = result.lower()
+	return result
 
 def getNextMelodyOrChord(melody):
 	#melody is a deque
@@ -341,6 +419,8 @@ def writeLilyPondFile(upper,lower,filename,title,keyInfo):
 
 def writeSheet(title,rhyCompl,melCompl,exprCompl,rhythmTreble,rhythmBass,melodyTreble,melodyBass,expressionTreble,expressionBass,keyAcc,keyTone,keyMajMin):
 	#rhythm
+	keyInfo = list([keyAcc,keyTone,keyMajMin])
+
 	if rhyCompl == "0":
 		#rhythm from input
 		rhythmTreble = rhythmTreble.split()
@@ -390,7 +470,7 @@ def writeSheet(title,rhyCompl,melCompl,exprCompl,rhythmTreble,rhythmBass,melodyT
 
 		melodyBass = generateRandomMelodyString()
 		melodyBass = StringQueue(melodyBass)
-		decoder = MelodyDecoder(melodyBass,int(melCompl))
+		decoder = MelodyDecoder(melodyBass,int(melCompl),key=createKeyForDecoding(keyInfo))
 		melodyBass = []
 		for i in range(0,300):
 			melodyBass.append(decoder.next("bass"))
@@ -519,6 +599,5 @@ def testNextMelOrChord():
 #testMelodyDecoder()
 #writeRandomLilyPondFile(3,1,2)
 #testNextMelOrChord()
-
 
 
