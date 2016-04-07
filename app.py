@@ -70,7 +70,7 @@ def home():
 
             keyAcc = request.form['key-accidental']
             keyTone = request.form['base-key']
-            keyMinMaj = request.form['major-minor']
+            keyMinMaj = request.form['hidden-major-minor']
             MG.writeSheet(title,rhyCompl,melCompl,expCompl,rhythmTreble,rhythmBass,melodyTreble,melodyBass,expTreble,expBass,keyAcc,keyTone,keyMinMaj)
             compileFile.compile()
             return serve_static("Sheet.pdf")

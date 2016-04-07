@@ -351,15 +351,18 @@ $(document).ready(function(){
 	}
 
 	if($('#major-minor').length > 0){
+		$('#hidden-major-minor').val("MAJOR");
 		$('#major-minor').click(function(){
 			var label = $('#major-minor-label');
 			var value = label.text();
 			if(value == 'MAJOR'){
 				label.html("<span></span>MINOR");
 				$('#major-minor').val("MINOR");
+				$('#hidden-major-minor').val("MINOR");
 			}else{
 				label.html("<span></span>MAJOR");
 				$('#major-minor').val("MAJOR");
+				$('#hidden-major-minor').val("MAJOR");
 			}
 		});
 	}
