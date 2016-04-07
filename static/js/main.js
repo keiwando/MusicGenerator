@@ -171,6 +171,16 @@ $(document).ready(function(){
 			}	
 		}
 
+		last = parts[parts.length - 1];
+		last = last.charAt(0);
+		if(last == "<"){
+			if(staff == "treble"){
+				window.inChordTreble = false;
+			}else{
+				window.inChordBass = false;
+			}	
+		}
+
 		displayStaff.val(text);
 		mainStaff.val(text);
 	}
