@@ -48,6 +48,7 @@ def default():
 @app.route('/',methods=['POST','GET'])
 def home():
     if request.method == 'POST':
+        #return str(request.form['hidden-major-minor'])
         if 'file' in request.files:
             file = request.files['file']
             if allowed_file(file.filename):
