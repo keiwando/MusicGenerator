@@ -188,14 +188,13 @@ a:visited {
 }
 
 #content {
-    padding-bottom: 3em;
-
-    
+    padding-bottom: 3em;    
 }
 
 .settings-container {
 	display: inline-flex;
-	justify-content: space-between;
+	flex-wrap: wrap;
+	justify-content: space-around;
 }
 
 .randomButton {
