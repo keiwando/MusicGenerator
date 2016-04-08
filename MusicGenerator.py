@@ -301,12 +301,7 @@ def createKeyForDecoding(keyInfo):
 	accidental = keyInfo[0]
 	tone = keyInfo[1]
 	majmin = keyInfo[2]
-	result = tone
-	if accidental == 'FLAT':
-		result += 'es'
-	elif accidental == 'SHARP':
-		result += 'is'
-	result += majmin
+	result = tone + accidental + majmin
 	result = result.lower()
 	return result
 
@@ -599,5 +594,5 @@ def testNextMelOrChord():
 #testMelodyDecoder()
 #writeRandomLilyPondFile(3,1,2)
 #testNextMelOrChord()
-
+#print createKeyForDecoding(['SHARP','c','MINOR'])
 
