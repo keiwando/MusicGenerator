@@ -215,7 +215,41 @@ $(document).ready(function(){
 	   $(window).keypress(function(e) {
 	       var key = String.fromCharCode(e.keyCode);
 	       key = key.toLowerCase();
-	       switch(key){
+
+	       //rhythm input
+	       if($('#rhythm-lock').find('.locked-img').hasClass("hidden")){
+	       	switch(key){
+	       		case 'w': addRhythm("treble"); break;
+	       		case 's': addRhythm("bass"); break;
+	       		case 'r': removeRhythm("treble"); break;
+	       		case 'f': removeRhythm("bass"); break;
+
+	       		case 'q': case 'e': changeNoteRest(); break;
+		       	case 'a': previousLength(); break;
+		       	case 'd': nextLength(); break;
+		       	case '.': checkUncheckCheckbox($('#dotted')); break;
+	       	}
+	       }
+
+	       //melody input
+	       if($('#melody-lock').find('.locked-img').hasClass("hidden")){
+	       	switch(key){
+	       		case 'i': addMelody("treble"); break;
+	       		case 'k': addMelody("bass"); break;
+	       		case 'z': case 'y': removeMelody("treble"); break;
+	       		case 'h': removeMelody("bass"); break;
+
+	       		case 'j': previousOctave(); break;
+		       	case 'l': nextOctave(); break;
+		       	case 'u': previousTone(); break;
+		       	case 'o': nextTone(); break;
+		       	case ',': checkUncheckCheckbox($('#chord')); break;
+		       	case '7': previousAccidental(); break;
+		       	case '9': nextAccidental(); break;
+	       	}
+	       }
+
+	       /*switch(key){
 	       	case 'w': addRhythm("treble"); break;
 	       	case 's': addRhythm("bass"); break;
 	       	case 'i': addMelody("treble"); break;
@@ -239,7 +273,7 @@ $(document).ready(function(){
 	       	case ',': checkUncheckCheckbox($('#chord')); break;
 	       	case '7': previousAccidental(); break;
 	       	case '9': nextAccidental(); break;
-	       }
+	       }*/
 	   });
 	}); 
 
