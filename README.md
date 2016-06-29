@@ -8,4 +8,4 @@ Enter a sequence of notes and let the rythm be randomly generated for you - or v
 levels for rhythm, melody and expression.
 
 Note: 
-Not really intended for writing long and complex pieces by input. More as something for fun/inpiration
+Not really intended for writing long and complex pieces by input. More as something for fun/inspiration
